@@ -1,0 +1,15 @@
+{
+  "name": "@yuzijie/wiki",
+  "version": "1.0.0",
+  "description": "YU Zijie's personal wiki",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "/Users/yu/GDrive/Laboratory/Repos/Tiddlywiki.git"
+  },
+  "keywords": [
+    "wiki"
+  ],
+  "author": "YU ZIJIE",
+  "license": "ISC"
+}
