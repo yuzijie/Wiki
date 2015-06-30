@@ -1,0 +1,16 @@
+created: 20150425110034202
+modified: 20150425110924054
+tags: Git Workflow
+title: Gitflow Workflow
+type: text/vnd.tiddlywiki
+url: https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
+
+{{gitflow.png}}
+
+The Gitflow Workflow section below is derived from Vincent Driessen at [[nvie|http://nvie.com]].
+
+The Gitflow Workflow defines a strict branching model designed around the project release. While somewhat more complicated than the [[Feature Branch Workflow]], this provides a robust framework for managing larger projects.
+
+This workflow doesn’t add any new concepts or commands beyond what’s required for the [[Feature Branch Workflow]]. Instead, it assigns very specific roles to different branches and defines how and when they should interact. In addition to feature branches, it uses individual branches for ''preparing'', ''maintaining'', and ''recording'' releases.
+
+[[Read More|https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow]]

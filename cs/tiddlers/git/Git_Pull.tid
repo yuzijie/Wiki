@@ -1,0 +1,16 @@
+created: 20150425100855826
+modified: 20150425101059639
+tags: Git
+title: Git Pull
+type: text/vnd.tiddlywiki
+url: http://git-scm.com/docs/git-pull
+
+! NAME
+
+`git-pull` - ''Fetch from'' and ''integrate'' with another repository or a local branch
+
+! DESCRIPTION 
+
+Incorporates changes from a remote repository into the current branch.
+
+In its default mode, `git pull` is shorthand for `git fetch` followed by `git merge FETCH_HEAD`.

@@ -1,0 +1,68 @@
+created: 20150425101117454
+modified: 20150425103447163
+tags: Git Workflow
+title: Feature Branch Workflow
+type: text/vnd.tiddlywiki
+url: https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow
+
+The core idea behind the Feature Branch Workflow is that all feature development should take place in a dedicated branch instead of the master branch.
+
+! Example
+
+''1.'' Mary begins a new feature.
+
+```
+git checkout -b marys-feature master
+```
+
+''2.'' On this branch, Mary edits, stages, and commits changes in the usual fashion, building up her feature with as many commits as necessary.
+
+```
+git status
+git add <some-file>
+git commit
+```
+
+''3.'' Mary adds a few commits to her feature over the course of the morning. Before she leaves for lunch, it’s a good idea to push her feature branch up to the central repository.
+
+```
+git push -u origin marys-feature
+```
+
+This command pushes `marys-feature` to the central repository (`origin`), and the `-u` flag adds it as a remote tracking branch. After setting up the tracking branch, Mary can call `git push` without any parameters to push her feature.
+
+''4.'' When Mary gets back from lunch, she completes her feature. Before merging it into master, she needs to file a pull request letting the rest of the team know she's done.
+
+But first, she should make sure the central repository has her most recent commits:
+
+```
+git push
+```
+
+she files the pull request in her Git GUI.
+
+''5.'' Bill receives the pull request. He decides he wants to make a few changes before integrating it into the official project, and he and Mary have some back-and-forth via the pull request.
+
+''6.'' Mary makes the changes.
+
+To make the changes, Mary uses the exact same process as she did to create the first iteration of her feature.
+
+If he wanted, Bill could pull `marys-feature` into his local repository and work on it on his own. Any commits he added would also show up in the pull request.
+
+''7.'' Mary publishes her feature.
+
+''8.'' Once Bill is ready to accept the pull request, someone needs to merge the feature into the stable project (this can be done by either Bill or Mary).
+
+```
+git checkout master
+git pull
+git pull origin marys-feature
+git push
+```
+
+''Explained''
+
+# checkout master branck
+# make sure master is up to date
+# fetch the latest marys-feature and merge it to master
+# push back to origin

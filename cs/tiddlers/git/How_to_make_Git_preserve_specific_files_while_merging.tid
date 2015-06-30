@@ -1,0 +1,44 @@
+created: 20150505084304562
+modified: 20150505125231573
+tags: Digest Git
+title: How to make Git preserve specific files while merging
+type: text/vnd.tiddlywiki
+url: https://medium.com/@porteneuve/how-to-make-git-preserve-specific-files-while-merging-18c92343826b
+
+To retain our current version of a file during a merge (a merge is always incoming, remember: we merge into the current branch), we need to make use of an oft-ignored Git feature: ''Git attributes''.
+
+These mappings are usually versioned themselves, just like what we would put in //.gitignore// files, but these are stored in //.gitattributes// (and just like //.gitignore// has a strictly-local buddy at //.git/info/exclude//, we also have //.git/info/attributes//).
+
+The format is simple: every line that neither is empty nor starts with a hash (`#`) sign to denote a comment uses a ''globbing-pattern = attribute-info'' format (the amount of whitespace being irrelevant).
+
+An attribute can be ''set'' (present with no specific value), ''unset'' (present in negative form), ''set to a value'' or ''unspecified''.
+
+! Merge drivers
+
+What we’re interested in here is the ''merge'' attribute, that lets us map files to a merge driver, a ''command'' responsible for the actual merging of these files.
+
+This attribute has default values based on the detected type for this file: it would normally be considered //text// or //binary//.
+
+We can, however, create our own merge drivers (and define these in our usual Git configuration, say our `~/.gitconfig` file), then use attributes to map specific files to our drivers. Git can call such a driver with up to three arguments, in whatever order we specify: ''paths to the common-ancestor version of the file'', ''to our version'', and ''to the merged branch’s version''.
+
+! Setting up
+
+So let’s start by defining a merge driver that would always favor our current version of the file, by making use of the existing true command. We’ll call this driver ours, to keep in line with similar merge strategies:
+
+```
+git config --global merge.ours.driver true
+```
+
+After set up git repo, let’s add a .gitattributes file at the root level of our repo, that would tell //email.json// to use that driver instead of the standard one:
+
+```
+echo 'email.json merge=ours' >> .gitattributes
+git add .gitattributes
+git commit -m 'chore: Preserve email.json during merges'
+```
+
+! 注意
+
+这种方法只是在两个文件有 Conflict 的情况下才适用。一旦 Branch 之间进行过一次 Merge 之后，两个文件虽然不同，但是已经不再 Conflict 了。
+
+所以以上的方法只可以单向使用，绝不可以双向使用！而方向取决于第一次 Merge 的方向。

@@ -1,0 +1,102 @@
+created: 20150425104001932
+modified: 20150425110014222
+tags: Git Workflow
+title: Centralized Workflow
+type: text/vnd.tiddlywiki
+url: https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
+
+Like Subversion, the Centralized Workflow uses a central repository to serve as the single point-of-entry for all changes to the project. This workflow doesn’t require any other branches besides `master`.
+
+! Example
+
+''1.'' Someone initializes the central repository.
+
+Central repositories should always be ''bare'' repositories (they shouldn’t have a working directory), which can be created as follows:
+
+```
+ssh user@host git init --bare /path/to/repo.git
+```
+
+''2.'' Everybody clones the central repository.
+
+```
+git clone ssh://user@host/path/to/repo.git
+```
+
+When you clone a repository, Git automatically adds a shortcut called `origin` that points back to the “parent” repository
+
+''3.'' John works on his feature: edit, stage, and commit.
+
+```
+git status # View the state of the repo
+git add <some-file> # Stage a file
+git commit # Commit a file</some-file>
+```
+
+''4.'' Mary works on her feature, using the same edit/stage/commit process.
+
+''5.'' John publishes his feature.
+
+```
+git push origin master
+```
+
+Remember that `origin` is the remote connection to the central repository that Git created when John cloned it. The `master` argument tells Git to try to make the `origin`’s `master` branch look like his local `master` branch.
+
+''6.'' Mary tries to publish her feature.
+
+Since her local history has diverged from the central repository, Git will refuse the request with a rather verbose error message:
+
+```
+error: failed to push some refs to '/path/to/repo.git'
+hint: Updates were rejected because the tip of your current branch is behind its remote counterpart. Merge the remote changes (e.g. 'git pull') before pushing again.
+```
+
+''7.'' Mary rebases on top of John’s commit(s).
+
+```
+git pull --rebase origin master
+```
+
+The `--rebase` option tells Git to move all of Mary’s commits to the tip of the master branch after synchronising it with the changes from the central repository. The pull would still work if you ''forgot'' this option, but you would wind up with a superfluous “merge commit” every time someone needed to synchronize with the central repository.
+
+''8.'' Mary resolves a merge conflict. 
+
+Rebasing works by transferring each local commit to the updated master branch one at a time. This means that you catch merge conflicts on a commit-by-commit basis rather than resolving all of them in one massive merge commit.
+
+Git will pause the rebase at the current commit and output the following message, along with some relevant instructions:
+
+```
+CONFLICT (content): Merge conflict in <some-file>
+```
+
+Mary would simply run a `git status` to see where the problem is.
+
+Conflicted files will appear in the Unmerged paths section:
+
+```
+# Unmerged paths:
+# (use "git reset HEAD <some-file>..." to unstage)
+# (use "git add/rm <some-file>..." as appropriate to mark resolution)
+#
+# both modified: <some-file>
+```
+
+Then, she’ll edit the file(s) to her liking. Once she’s happy with the result, she can stage the file(s) in the usual fashion and let `git rebase` do the rest:
+
+```
+git add <some-file> 
+git rebase --continue
+```
+
+If you get to this point and realize and you have no idea what’s going on, don’t panic. Just execute the following command and you’ll be right back to where you started before you ran `git pull --rebase`.
+
+```
+git rebase --abort
+```
+
+''9.'' Mary successfully publishes her feature.
+
+```
+git push origin master
+```
