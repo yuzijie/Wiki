@@ -22,8 +22,10 @@ if [ -z "$1" ]; then
 fi
 
 if [ -d "${NPM_ROOT}/$1" ]; then
-    tiddlywiki $1 --server &
+    tiddlywiki ${NPM_ROOT}/$1 --server &
+    sleep 1
     open http://127.0.0.1:8080/
+    fg %-
 else
     echo "Wiki name not found!"
     return 1
