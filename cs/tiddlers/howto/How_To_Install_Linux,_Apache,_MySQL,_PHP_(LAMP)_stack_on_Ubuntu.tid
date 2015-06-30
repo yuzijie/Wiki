@@ -1,0 +1,75 @@
+created: 20150501154544153
+modified: 20150501161944987
+tags: Server Digest
+title: How To Install Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu
+type: text/vnd.tiddlywiki
+url: https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu
+
+! Step One—Install Apache
+
+```
+sudo apt-get update
+sudo apt-get install apache2
+```
+
+!! How to Find your Server’s IP address
+
+```
+ifconfig eth0 | grep inet | awk '{ print $2 }'
+```
+
+! Step Two—Install MySQL
+
+```
+sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql
+```
+
+Once you have installed MySQL, we should activate it with this command:
+
+```
+sudo mysql_install_db
+```
+
+Finish up by running the MySQL set up script:
+
+```
+sudo /usr/bin/mysql_secure_installation
+```
+
+! Step Three—Install PHP
+
+To install PHP, open terminal and type in this command.
+
+```
+sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
+```
+
+It may also be useful to add php to the directory index, to serve the relevant php index files:
+
+```
+sudo vi /etc/apache2/mods-enabled/dir.conf
+```
+
+Add index.php to the beginning of index files. The page should now look like this:
+
+```
+<IfModule mod_dir.c>
+DirectoryIndex index.php index.html index.cgi index.pl index.php index.xhtml index.htm
+</IfModule>
+```
+
+!! PHP Modules
+
+PHP also has a variety of useful libraries and modules that you can add onto your virtual server. You can see the libraries that are available.
+
+```
+apt-cache search php5-
+```
+
+Once you decide to install the module, type:
+
+```
+sudo apt-get install name of the module
+```
+
+You can install multiple libraries at once by separating the name of each module with a space.

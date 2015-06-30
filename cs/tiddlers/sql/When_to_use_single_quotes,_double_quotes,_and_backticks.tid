@@ -1,0 +1,22 @@
+created: 20150502211348165
+modified: 20150502212200729
+tags: SQL StackOverflow
+title: When to use single quotes, double quotes, and backticks
+type: text/vnd.tiddlywiki
+
+! Question
+
+When to use single quotes, double quotes, and backticks?
+
+! Answer
+
+''Backticks'' are to be used for ''table and column'' identifiers, but are only necessary when the identifier is a ''MySQL reserved keyword'', or when ''the identifier contains whitespace characters or characters beyond a limited set''. It is often recommended to avoid using reserved keywords as column or table identifiers when possible, avoiding the quoting issue.
+
+''Single quotes'' should be used for string values like in the VALUES() list. Double quotes are supported by MySQL for string values as well, but single quotes are more widely accepted by other RDBMS, so it is a good habit to use single quotes instead of double.
+
+MySQL also expects `DATE` and `DATETIME` literal values to be single-quoted as strings like `'2001-01-01 00:00:00'`
+
+There are two types of quotes in MySQL:
+
+* ''Single quotes'' for enclosing string literals
+* ''Backticks'' for enclosing identifiers such as table and column names

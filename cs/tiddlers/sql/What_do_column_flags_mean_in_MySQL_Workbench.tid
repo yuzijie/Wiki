@@ -1,0 +1,14 @@
+created: 20150507103150364
+modified: 20150507103405023
+tags: SQL StackOverflow
+title: What do column flags mean in MySQL Workbench
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/3663952/what-do-column-flags-mean-in-mysql-workbench
+
+* ''PK'' Primary Key
+* ''NN'' Not Null
+* ''BIN'' Binary (stores data as binary strings. There is no character set so sorting and comparison is based on the numeric values of the bytes in the values.)
+* ''UN'' Unsigned (non-negative numbers only. so if the range is -500 to 500, instead its 0 - 1000, the range is the same but it starts at 0)
+* ''UQ'' Create/remove Unique Key
+* ''ZF'' Zero-Filled (if the length is 5 like INT(5) then every field is filled with 0’s to the 5th value. 12 = 00012, 400 = 00400, etc. )
+* ''AI'' Auto Increment

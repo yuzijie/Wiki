@@ -1,0 +1,24 @@
+created: 20150507110111279
+modified: 20150507110323103
+tags: Command StackOverflow
+title: Given two directory trees, find out which files differ
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/4997693/given-two-directory-trees-how-can-i-find-out-which-files-differ
+
+! Question
+
+If I want find the differences between two directory trees, I usually just execute:
+
+```
+diff -r dir1/ dir2/
+```
+
+This outputs exactly what the differences are between corresponding files. I'm interested in just getting a list of corresponding files whose content differs.
+
+! Answer
+
+```
+diff --brief -r dir1/ dir2/
+```
+
+Should do what you need.
