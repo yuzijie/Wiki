@@ -11,5 +11,8 @@
     "wiki"
   ],
   "author": "YU ZIJIE",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "tiddlywiki": "^5.1.8"
+  }
 }
