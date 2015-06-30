@@ -1,0 +1,69 @@
+created: 20150531161224667
+modified: 20150531161728126
+tags: Javascript
+title: The Factory Patter
+type: text/vnd.tiddlywiki
+url: https://carldanley.com/js-factory-pattern/
+
+! Intro
+
+This pattern focuses on object creation but differs from other patterns in the [[creation category|JavaScript Design Patterns]] in that it does not require a constructor function. The factory pattern generally supplies an interface for developers to create new objects through the use of the factory rather than invoking the `new` operator on an object. Imagine that you needed a car door so you might goto a car factory that produces the product you're interested in and ask it to give you what you need. The factory then supervises the creation of the new car door (or object) and gives it to you. This example paints a good picture for how the factory pattern works; you simply ask it for a type of component, it instantiates the component (given it exists), and returns you what you were looking for.
+
+! Advantages
+
+* Makes complex object creation easy through an interface that can bootstrap this process for you
+* Great for generating different objects based on the environment
+* Practical for components that require similar instantiation or methods
+* Great for decoupling components by bootstrapping the instantiation of a different object to carry out work for particular instances
+
+! Disadvantages
+
+* Unit testing can be difficult as a direct result of the object creation process being hidden by the factory methods
+
+! Example
+
+```
+function CarDoor( options ) {
+  this.color = options.color || 'red';
+  this.side = options.side || 'right';
+  this.hasPowerWindows = options.hasPowerWindows || true;
+}
+ 
+function CarSeat( options ) {
+  this.color = options.color || 'gray';
+  this.material = options.material || 'leather';
+  this.isReclinable = options.isReclinable || true;
+}
+ 
+function CarPartFactory() {}
+CarPartFactory.prototype.createPart = function createCarPart( options ) {
+  var parentClass = null;
+  
+  if( options.partType === 'door' ) {
+    parentClass = CarDoor;
+  } else if( options.partType === 'seat' ) {
+    parentClass = CarSeat;
+  }
+  
+  if( parentClass === null ) {
+    return false;
+  }
+  
+  return new parentClass( options );
+}
+ 
+// example usage
+var myPartFactory = new CarPartFactory();
+var seat = myPartFactory.createPart( {
+  partType : 'seat',
+  material : 'leather',
+  color : 'blue',
+  isReclinable : false
+} );
+ 
+// outputs: true
+console.log( seat instanceof CarSeat );
+ 
+// outputs a CarSeat object with material "leather", color "blue", isReclinable "false"
+console.log( seat );
+```

@@ -1,0 +1,79 @@
+created: 20150527133308909
+modified: 20150527133929715
+tags: Javascript
+title: The Facade Pattern
+type: text/vnd.tiddlywiki
+url: https://carldanley.com/js-facade-pattern/
+
+! Intro
+
+The purpose of the facade pattern is to conceal the underlying complexity of the code by using an anonymous function as an extra layer. Internal subroutines are never exposed but rather invoked through a facade which makes this pattern secure in that it never exposes anything to the developers working with it. The facade pattern is both extremely interesting and very useful for adding an extra layer of security to your already minified code. This pattern is extremely useful when coupled with the [[revealing module pattern|The Revealing Module Pattern]].
+
+! Advantages
+
+* Enhances security for your web application
+* Works well in combination with other patterns
+* Easy to implement
+* Makes it easy to patch internals
+* Provides a simpler public interface
+* Proven useful for other major libraries such as jQuery
+
+! Disadvantages
+
+There aren't any real drawbacks as it provides a unified interface to a set of interfaces in a subsystem. As a result, you aren't forced to make any unwanted compromises, thus a win-win. One possible note worth mentioning is that a developer must decide whether the implicit cost of implementation is really worth the abstraction (though this is generally a small footprint).
+
+! Examples
+
+```
+// a simple facade that masks the various
+// browser-specific methods
+function addEvent( element, event, callback ) {
+  
+  if( window.addEventListener ) {
+    element.addEventListener( event, callback, false );
+  } else if( document.attachEvent ) {
+    element.attachEvent( 'on' + event, callback );
+  } else {
+    element[ 'on' + event ] = callback;
+  }
+  
+}
+```
+
+The above is a basic example of the facade pattern.
+
+```
+var MyModule = ( function( window, undefined ) {
+ 
+  // revealing module pattern ftw
+  function MyModule() {
+    
+    function someMethod() {
+      alert( 'some method' );
+    }
+    
+    function someOtherMethod() {
+      alert( 'some other method' );
+    }
+    
+    // expose publicly available methods
+    return {
+      
+      // in our normal revealing module pattern,
+      // we'd do the following:
+      someMethod : someMethod,
+      
+      // in the facade pattern, we mask the internals
+      // so no one has direct access by doing this:
+      someMethod : function() {
+        someMethod();
+      }
+      
+    };
+    
+  }
+  
+} )( window );
+```
+
+The above is a more advanced version of the facade pattern that adds security to internal methods.

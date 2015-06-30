@@ -1,0 +1,85 @@
+created: 20150527120957308
+modified: 20150527132204240
+tags: Javascript
+title: The Mediator Pattern
+type: text/vnd.tiddlywiki
+url: https://carldanley.com/js-mediator-pattern/
+
+! Intro
+
+The American Heritage dictionary defines the word ''mediator'' as "one that mediates, especially one that reconciles differences between disputants." In this manner, the mediator pattern usually implements a single object that becomes a shared resource through all of the different pieces of an application. It's a higher-level version of pub/sub in that it's commonly used to communicate across the different features of an application in contrast to being used within one feature to communicate with all of the individual pieces of that same feature.
+
+> "Understanding the similarities and differences between an event aggregator and mediator is important for semantic reasons." - Derick Bailey
+
+! Advantages
+
+* Reduces the communication relationship from "many-to-many" to "many-to-one"
+* Helps us pinpoint dependencies
+* Excellent at decoupling objects which often promotes smaller, reusable components
+
+! Disadvantages
+
+* Introduces a single point of failure
+* When modules communicate back and forth using a mediator pattern, it tends to become cumbersome and usually results in a clear performance hit. It's best when the mediator is only used to coordinate actions across multiple features and not for communication within the individual features themselves; keep the airways clean!
+
+! Example
+
+```
+var Mediator = ( function( window, undefined ) {
+ 
+	function Mediator() {
+		this._topics = {};
+	}
+ 
+	Mediator.prototype.subscribe = function mediatorSubscribe( topic, callback ) {
+		if( ! this._topics.hasOwnProperty( topic ) ) {
+			this._topics[ topic ] = [];
+		}
+ 
+		this._topics[ topic ].push( callback );
+		return true;
+	};
+ 
+	Mediator.prototype.unsubscribe = function mediatorUnsubscrive( topic, callback ) {
+		if( ! this._topics.hasOwnProperty( topic ) ) {
+			return false;
+		}
+ 
+		for( var i = 0, len = this._topics[ topic ].length; i < len; i++ ) {
+			if( this._topics[ topic ][ i ] === callback ) {
+				this._topics[ topic ].splice( i, 1 );
+				return true;
+			}
+		}
+ 
+		return false;
+	};
+ 
+	Mediator.prototype.publish = function mediatorPublish() {
+		var args = Array.prototype.slice.call( arguments );
+		var topic = args.shift();
+ 
+		if( ! this._topics.hasOwnProperty( topic ) ) {
+			return false;
+		}
+ 
+		for( var i = 0, len = this._topics[ topic ].length; i < len; i++ ) {
+			this._topics[ topic ][ i ].apply( undefined, args );
+		}
+		return true;
+	};
+ 
+	return Mediator;
+ 
+} )( window );
+ 
+// example subscriber function
+var Subscriber = function ExampleSubscriber( myVariable ) {
+  console.log( myVariable );
+};
+ 
+// example usages
+var myMediator = new Mediator();
+myMediator.subscribe( 'some event', Subscriber );
+myMediator.publish( 'some event', 'foo bar' ); // console logs "foo bar"
+```

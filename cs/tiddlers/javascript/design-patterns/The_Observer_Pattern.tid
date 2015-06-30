@@ -1,0 +1,112 @@
+created: 20150527042444619
+modified: 20150527131826124
+tags: Javascript
+title: The Observer Pattern
+type: text/vnd.tiddlywiki
+url: https://carldanley.com/js-observer-pattern/
+
+! Intro
+
+This pattern implements a single object (the subject) that maintains a reference to a collection of objects (known as "observers") and broadcasts notifications when a change to state occurs. When we don't want to observe an object, we simply remove it from the collection of objects being observed. The observer pattern is similar to both the pub/sub implementation and the [[mediator pattern|The Mediator Pattern]] but still different in purpose & theory and worth mentioning. Study the example below for a good idea of what's happening behind the scenes.
+
+! Advantages
+
+* Requires deeper-level thinking of the relationship between the various components of an application
+* Helps us pinpoint dependencies
+* Excellent at decoupling objects which often promotes smaller, reusable components
+
+! Disadvantages
+
+* Checking the integrity of your application can become difficult
+* Switching a subscriber from one publisher to another can be costly
+
+! Example
+
+```
+// build the Subject base class
+var Subject = ( function( window, undefined ) {
+ 
+  function Subject() {
+    this._list = [];
+  }
+ 
+  // this method will handle adding observers to the internal list
+  Subject.prototype.observe = function observeObject( obj ) {
+    console.log( 'added new observer' );
+    this._list.push( obj );
+  };
+  
+  Subject.prototype.unobserve = function unobserveObject( obj ) {
+    for( var i = 0, len = this._list.length; i < len; i++ ) {
+      if( this._list[ i ] === obj ) {
+        this._list.splice( i, 1 );
+        console.log( 'removed existing observer' );
+        return true;
+      }
+    }
+    return false;
+  };
+  
+  Subject.prototype.notify = function notifyObservers() {
+    var args = Array.prototype.slice.call( arguments, 0 );
+    for( var i = 0, len = this._list.length; i < len; i++ ) {
+      this._list[ i ].update.apply( null, args );
+    }
+  };
+ 
+  return Subject;
+ 
+} )( window );
+ 
+// setup an object that fetchs stocks
+function StockGrabber() {
+  
+  var subject = new Subject();
+  
+  this.addObserver = function addObserver( newObserver ) {
+    subject.observe( newObserver );
+  };
+  
+  this.removeObserver = function removeObserver( deleteObserver ) {
+    subject.unobserve( deleteObserver );
+  };
+  
+  this.fetchStocks = function fetchStocks() {
+    // fake fetching the stocks
+    var stocks = {
+      aapl : 167.00,
+      goog : 243.67,
+      msft : 99.34
+    };
+    
+    // notify our observers of the stock change
+    subject.notify( stocks );
+  };
+  
+}
+ 
+// define a couple of different observers
+var StockUpdaterComponent = {
+  update : function() {
+    console.log( '"update" called on StockUpdater with: ', arguments );
+  }
+};
+var StockChartsComponent = {
+  update : function() {
+    console.log( '"update" called on StockCharts with: ', arguments );
+  }
+};
+ 
+// example usage
+var stockApp = new StockGrabber();
+stockApp.addObserver( StockUpdaterComponent );
+stockApp.fetchStocks(); // console logs: "update" called on StockUpdater with...
+stockApp.addObserver( StockChartsComponent );
+stockApp.fetchStocks(); // console logs: "update" called on StockUpdater with... "update" called on StockCarts with...
+stockApp.removeObserver( StockUpdaterComponent );
+stockApp.fetchStocks(); // console logs: "update" called on StockCharts with...
+stockApp.removeObserver( StockChartsComponent );
+stockApp.fetchStocks(); // does nothing; no observers
+```
+
+In the example above, the `Subject` object becomes a base class from which we build an example stock tracking application. You can see that the `StockGrabber` object uses the `Subject` object internally to handle notifications to other components of the application such as the `StockUpdaterComponent` and the `StockChartsComponent`.
