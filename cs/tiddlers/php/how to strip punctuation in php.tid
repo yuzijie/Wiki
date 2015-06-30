@@ -1,0 +1,22 @@
+created: 20150417164214956
+modified: 20150425100714359
+tags: StackOverflow PHP
+title: how to strip punctuation in php
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/5233734/how-to-strip-punctuation-in-php
+
+! Question
+
+How can I strip punctuation except for these characters
+
+```
+. = $ ' - € %
+```
+
+! Answer
+
+Since you need to match some Unicode characters (€) it would be sensible to use a regular expression. The pattern `\p{P}` matches any known punctuation, and the assertion excludes your desired special characters from vanishing:
+
+```
+$text = preg_replace("/(?![.=$'€%-])\p{P}/u", "", $text);
+```

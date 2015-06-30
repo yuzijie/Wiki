@@ -1,0 +1,99 @@
+created: 20150417162134818
+modified: 20150425100657751
+tags: 方法 PHP
+title: preg_split
+type: text/vnd.tiddlywiki
+url: http://php.net/preg-split
+
+Split string by a regular expression
+
+! Description
+
+Split the given string by a regular expression.
+
+```
+array preg_split ( string $pattern , string $subject [, int $limit = -1 [, int $flags = 0 ]] )
+```
+
+! Examples
+
+''Example #1 preg_split() example : Get the parts of a search string''
+
+```
+<?php
+// split the phrase by any number of commas or space characters,
+// which include " ", \r, \t, \n and \f
+$keywords = preg_split("/[\s,]+/", "hypertext language, programming");
+print_r($keywords);
+?>
+```
+
+The above example will output:
+
+```
+Array
+(
+    [0] => hypertext
+    [1] => language
+    [2] => programming
+)
+```
+
+''Example #2 Splitting a string into component characters''
+
+```
+<?php
+$str = 'string';
+$chars = preg_split('//', $str, -1, PREG_SPLIT_NO_EMPTY);
+print_r($chars);
+?>
+```
+
+The above example will output:
+
+```
+Array
+(
+    [0] => s
+    [1] => t
+    [2] => r
+    [3] => i
+    [4] => n
+    [5] => g
+)
+```
+
+''Example #3 Splitting a string into matches and their offsets''
+
+```
+<?php
+$str = 'hypertext language programming';
+$chars = preg_split('/ /', $str, -1, PREG_SPLIT_OFFSET_CAPTURE);
+print_r($chars);
+?>
+```
+
+The above example will output:
+
+```
+Array
+(
+    [0] => Array
+        (
+            [0] => hypertext
+            [1] => 0
+        )
+
+    [1] => Array
+        (
+            [0] => language
+            [1] => 10
+        )
+
+    [2] => Array
+        (
+            [0] => programming
+            [1] => 19
+        )
+)
+```

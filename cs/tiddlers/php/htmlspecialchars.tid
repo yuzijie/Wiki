@@ -1,0 +1,28 @@
+created: 20150417095104864
+modified: 20150425100350571
+tags: 方法 PHP
+title: htmlspecialchars
+type: text/vnd.tiddlywiki
+url: https://php.net/manual/en/function.htmlspecialchars.php
+
+htmlspecialchars — Convert special characters to HTML entities
+
+! Description
+
+Certain characters have special significance in HTML, and should be represented by HTML entities if they are to preserve their meanings. This function returns a string with these conversions made.
+
+```
+string htmlspecialchars ( string $string [, int $flags = ENT_COMPAT | ENT_HTML401 [, string $encoding = ini_get("default_charset") [, bool $double_encode = true ]]] )
+```
+
+! Examples
+
+```
+<?php
+$new = htmlspecialchars("<a href='test'>Test</a>", ENT_QUOTES);
+echo $new; // &lt;a href=&#039;test&#039;&gt;Test&lt;/a&gt;
+?>
+```
+
+! Related
+* [[htmlentities|htmlentities]]

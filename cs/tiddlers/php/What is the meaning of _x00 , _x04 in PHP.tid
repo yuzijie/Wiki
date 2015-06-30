@@ -1,0 +1,30 @@
+created: 20150417140318159
+modified: 20150425100447809
+tags: StackOverflow PHP
+title: What is the meaning of \x00 , \x04 in PHP
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/1182812/what-is-the-meaning-of-x00-x04-in-php
+
+! Question
+
+i have some codes having the `\x00` and `\x04` hex codes, what does it means?
+
+```
+$str= implode("\x00", $var['message']); //line 1
+$id= $var['message'] . "\x04" . $id;    //line 2
+```
+
+what will happen in the line1 and line2 I want to write these into a external file as binary format.
+
+where do i get all information like this.
+
+! Answer
+
+`\x` indicates hexadecimal notation. See: [[PHP strings|http://ch.php.net/manual/en/language.types.string.php#language.types.string.syntax.double]]
+
+Have a look at an [[ASCII|http://www.asciitable.com/]] table to see what 0x00 and 0x04 represent.
+
+```
+0x00 = NULL
+0x04 = EOT (End of transmission)
+```

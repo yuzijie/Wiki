@@ -1,0 +1,58 @@
+created: 20150417150240683
+modified: 20150425100606465
+tags: 方法 PHP
+title: array_unique
+type: text/vnd.tiddlywiki
+url: http://php.net/manual/en/function.array-unique.php
+
+array_unique — Removes duplicate values from an array
+
+! Description
+
+```
+array array_unique ( array $array [, int $sort_flags = SORT_STRING ] )
+```
+
+Takes an input array and returns a new array without duplicate values.
+
+! Examples
+
+''Example #1 array_unique() example''
+
+```
+<?php
+$input = array("a" => "green", "red", "b" => "green", "blue", "red");
+$result = array_unique($input);
+print_r($result);
+?>
+```
+
+The above example will output:
+
+```
+Array
+(
+    [a] => green
+    [0] => red
+    [1] => blue
+)
+```
+
+''Example #2 array_unique() and types''
+
+```
+<?php
+$input = array(4, "4", "3", 4, 3, "3");
+$result = array_unique($input);
+var_dump($result);
+?>
+```
+
+The above example will output:
+
+```
+array(2) {
+  [0] => int(4)
+  [2] => string(1) "3"
+}
+```

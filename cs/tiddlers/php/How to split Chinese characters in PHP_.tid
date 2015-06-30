@@ -1,0 +1,108 @@
+created: 20150417143813491
+modified: 20150425100539602
+tags: StackOverflow PHP
+title: How to split Chinese characters in PHP?
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/4113802/how-to-split-chinese-characters-in-php
+
+! Question
+
+I need some help regarding how to split Chinese characters mixed with English words and numbers in PHP.
+
+For example, if I read
+
+```
+FrontPage 2000中文版應用大全
+```
+
+I'm hoping to get
+
+```
+FrontPage, 2000, 中,文,版,應,用,大,全
+```
+
+or
+
+```
+FrontPage, 2,0,0,0, 中,文,版,應,用,大,全
+```
+
+How can I achieve this?
+
+! Answer
+
+Assuming you are using UTF-8 (or you can convert it to UTF-8 using Iconv or some other tools), then using the `u` modifier  ([[doc|Pattern Modifiers]])
+
+```
+<?php
+$s = "FrontPage 2000中文版應用大全";
+print_r(preg_match_all('/./u', $s, $matches));
+echo "\n";
+print_r($matches);
+?>
+```
+
+will give
+
+```
+21
+Array
+(
+    [0] => Array
+        (
+            [0] => F
+            [1] => r
+            [2] => o
+            [3] => n
+            [4] => t
+            [5] => P
+            [6] => a
+            [7] => g
+            [8] => e
+            [9] =>
+            [10] => 2
+            [11] => 0
+            [12] => 0
+            [13] => 0
+            [14] => 中
+            [15] => 文
+            [16] => 版
+            [17] => 應
+            [18] => 用
+            [19] => 大
+            [20] => 全
+        )
+)
+```
+
+Note that my source code is stored in a file encoded in UTF-8 also, for the $s to contain those characters.
+
+The following will match alphanumeric as a group:
+
+```
+<?php
+$s = "FrontPage 2000中文版應用大全";
+print_r(preg_match_all('/(\w+)|(.)/u', $s, $matches));
+echo "\n";
+print_r($matches[0]);
+?>
+```
+
+result:
+
+```
+10
+Array
+(
+    [0] => FrontPage
+    [1] =>
+    [2] => 2000
+    [3] => 中
+    [4] => 文
+    [5] => 版
+    [6] => 應
+    [7] => 用
+    [8] => 大
+    [9] => 全
+)
+```

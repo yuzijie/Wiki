@@ -1,0 +1,45 @@
+created: 20150417160007219
+modified: 20150425100649634
+tags: 方法 PHP
+title: html_entity_decode
+type: text/vnd.tiddlywiki
+url: http://php.net/html_entity_decode
+
+html_entity_decode — Convert all HTML entities to their applicable characters
+
+! Description
+
+html_entity_decode() is the opposite of [[htmlentities]] in that it converts all HTML entities in the string to their applicable characters.
+
+```
+string html_entity_decode ( string $string [, int $flags = ENT_COMPAT | ENT_HTML401 [, string $encoding = ini_get("default_charset") ]] )
+```
+
+! Available flags constants
+
+|!Constant Name |!Description |
+|ENT_COMPAT |Will convert double-quotes and leave single-quotes alone. |
+|ENT_QUOTES |Will convert both double and single quotes. |
+|ENT_NOQUOTES |Will leave both double and single quotes unconverted. |
+|ENT_HTML401 |Handle code as HTML 4.01. |
+|ENT_XML1 |Handle code as XML 1. |
+|ENT_XHTML |Handle code as XHTML. |
+|ENT_HTML5 |Handle code as HTML 5. |
+
+! Examples
+
+''Example #1 Decoding HTML entities''
+
+```
+<?php
+$orig = "I'll \"walk\" the <b>dog</b> now";
+
+$a = htmlentities($orig);
+
+$b = html_entity_decode($a);
+
+echo $a; // I'll &quot;walk&quot; the &lt;b&gt;dog&lt;/b&gt; now
+
+echo $b; // I'll "walk" the <b>dog</b> now
+?>
+```

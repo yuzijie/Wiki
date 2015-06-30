@@ -1,0 +1,18 @@
+created: 20150417165146692
+modified: 20150425100725264
+tags: StackOverflow PHP
+title: Remove empty array elements
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/3654295/remove-empty-array-elements
+
+! Question
+
+Some elements in my array are blankstring. I need to remove those elements.
+
+! Answer
+
+Simply use [[array_filter]], which conveniently handles all this for you:
+
+```
+print_r(array_filter($linksArray));
+```

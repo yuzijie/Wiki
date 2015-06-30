@@ -1,0 +1,34 @@
+created: 20150417093515417
+modified: 20150425100337079
+tags: 方法 PHP
+title: strip_tags
+type: text/vnd.tiddlywiki
+url: https://php.net/strip_tags
+
+! Description
+
+This function tries to return a string with all NULL bytes, HTML and PHP tags stripped from a given `str`.
+
+```
+string strip_tags ( string $str [, string $allowable_tags ] )
+```
+
+! Examples
+
+```
+<?php
+$text = '<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>';
+echo strip_tags($text);
+echo "\n";
+
+// Allow <p> and <a>
+echo strip_tags($text, '<p><a>');
+?>
+```
+
+output:
+
+```
+Test paragraph. Other text
+<p>Test paragraph.</p> <a href="#fragment">Other text</a>
+```

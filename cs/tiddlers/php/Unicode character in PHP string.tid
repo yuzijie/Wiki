@@ -1,0 +1,37 @@
+created: 20150417141833484
+modified: 20150425100458142
+tags: StackOverflow PHP
+title: Unicode character in PHP string
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/6058394/unicode-character-in-php-string
+
+! Question
+
+What is the PHP equivalent to the following C# line of code?
+
+string str="\u1000";
+
+(That creates a string with a single unicode character whose "unicode numeric value" is 0x1000 (decimal 4096)).
+
+That is. In PHP, How can I create a string with a single unicode character whose "unicode numeric value" is one that I know?
+
+! Answer
+
+Because JSON directly supports the `\uxxxx` syntax the first thing that comes into my mind is:
+
+```
+$unicodeChar = '\u1000';
+echo json_decode('"'.$unicodeChar.'"');
+```
+
+Another option would be to use `mb_convert_encoding()`
+
+```
+echo mb_convert_encoding('&#x1000;', 'UTF-8', 'HTML-ENTITIES');
+```
+
+or make use of the direct mapping between UTF-16BE (big endian) and the Unicode codepoint:
+
+```
+echo mb_convert_encoding("\x10\x00", 'UTF-8', 'UTF-16BE');
+```

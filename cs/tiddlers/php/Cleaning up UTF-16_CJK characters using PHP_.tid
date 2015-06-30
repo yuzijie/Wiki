@@ -1,0 +1,26 @@
+created: 20150417145247801
+modified: 20150425100558103
+tags: StackOverflow PHP
+title: Cleaning up UTF-16/CJK characters using PHP?
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/3690299/cleaning-up-utf-16-cjk-characters-using-php
+
+! Question
+
+I have some files on my computer that are in UTF-16, though this seems to be because of errors or corruption of the files rather than intent - they're supposed to be plain english. I uploaded one of these (here). If I leave the encoding in Firefox (Viwe>Character Encoding) at UTF-8 then I get tons of gibberish (see screenshot). If I change the encoding to UTF-16 then it looks much better (see screenshot2), though there are still a bunch of CJK characters present.
+
+I'd like to go through all these files and clean them up, and probably save them in utf-8 format (I'll be inserting the contents into a mysql table that uses the utf8_general_ci collation). Does anyone know how I can do this in automated fashion with PHP? I'd like to get rid of all the funky characters the file displays if you try to view it in UTF-8, and also all the CJK characters the display if you view in UTF-16.
+
+! Answer
+
+This should do the trick:
+
+```
+$txt = file_get_contents('watches.txt');
+$txt = mb_convert_encoding($txt, 'UTF-8');
+/*Nice regexp to strip non asci and non-printable chars*/
+$txt = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S','',$txt);
+$txt = preg_replace('/[^\x00-\x7F]+/S','',$txt);
+
+echo $txt;
+```
