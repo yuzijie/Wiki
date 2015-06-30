@@ -1,0 +1,39 @@
+created: 20150426102741676
+modified: 20150426110527125
+tags: Node.js Javascript
+title: npm install
+type: text/vnd.tiddlywiki
+url: https://docs.npmjs.com/cli/install
+
+!! 注意
+
+使用 `npm install --ignore-scripts <name>` 安装 Dependencies，这样避免在安装时运行脚本生成二进制文件，之后用 Git Commit 记录代码，然后再用 npm rebuild 生成二进制文件，最后把生成的文件加入进 .gitignore 里面。
+
+!! What is a Package
+
+* a) a folder containing a program described by a package.json file
+* b) a gzipped tarball containing (a)
+* c) a url that resolves to (b)
+* d) a `<name>@<version>` that is published on the registry with (c)
+* e) a `<name>@<tag>` that points to (d)
+* f) a `<name>` that has a "latest" tag satisfying (e)
+* g) a `<git remote url>` that resolves to (b)
+
+!! Arguments
+
+* `--save`: Package will appear in your dependencies.
+* `--save-dev`: Package will appear in your devDependencies.
+* `--save-optional`: Package will appear in your optionalDependencies.
+
+!! Useful Commands
+
+install automates the common work flow for building application dependencies:
+
+* `npm install --ignore-scripts`: install node dependencies ''without'' running scripts. Scripts can be run optionally with `--scripts`.
+* `npm run build`: custom build steps such as `grunt build` or `bower` can be specified in the package's `scripts.build` property, since front-end code served by node commonly requires some amount of preparation.
+* `npm prune --production`: remove development-only tools (such as bower, or grunt) that may have been required by the package's build scripts, but should not be deployed
+
+Note that compilation and install scripts should be run on the deployment server using:
+
+* `npm rebuild`: compile add-ons for current system
+* `npm install`: run any install scripts (not typical, but if they exist they may be required to prepare the application for running)
