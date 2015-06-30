@@ -1,0 +1,27 @@
+created: 20150425143457004
+modified: 20150425143709292
+tags: Javascript StackOverflow
+title: JS to detect browser width and height
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/9182811/js-to-detect-browser-width-and-height-works-in-chrome-safari-but-not-ie9-or-ff
+
+! Question
+
+JS to detect browser width and height works in Chrome & Safari but not IE9 or FF9
+
+! Answer
+
+Internet Explorer use different properties to store the window size. Into Internet Explorer clientWidth/Height is inner window size (subtract the pixels used by scroll bar, menu etc) so try
+
+```
+function load(){
+  if(window.outerHeight){
+      w.value = window.outerWidth;
+      h.value = window.outerHeight;
+  }
+  else {
+      w.value = document.body.clientWidth;
+      h.value = document.body.clientHeight; 
+  }
+}
+```

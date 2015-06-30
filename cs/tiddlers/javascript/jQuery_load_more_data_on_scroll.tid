@@ -1,0 +1,30 @@
+created: 20150508205348648
+modified: 20150508205908078
+tags: Javascript StackOverflow
+title: jQuery load more data on scroll
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/14035180/jquery-load-more-data-on-scroll
+
+! Question
+
+I am just wondering how can I implement more data on scroll only if the div.loading is visible.
+
+! Answer 1
+
+jQuery Waypoint plugin
+
+! Answer 2
+
+In jQuery, check whether you have hit the bottom of page using scroll function. Once you hit that, make an ajax call (you can show a loading image here till ajax response) and get the next set of data, append it to the div. This function gets executed as you scroll down the page again.
+
+```
+$(window).scroll(function() {
+  if($(window).scrollTop() == $(document).height() - $(window).height()) {
+    // ajax call get data from server and append to the div
+  }
+});
+```
+
+! Answer 3
+
+Take a look at this: http://www.jquery4u.com/tutorials/jquery-infinite-scrolling-demos/ Hopefully it helps you in this question.

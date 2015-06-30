@@ -1,0 +1,19 @@
+author: James Shore
+created: 20150426085249035
+modified: 20150426100428610
+source: https://github.com/jamesshore/automatopia
+tags: Workflow Javascript
+title: Javascript Workflow 2015
+type: text/vnd.tiddlywiki
+url: http://www.letscodejavascript.com/v3/episodes/lessons_learned/16
+
+# A Reliable, Reproducible Build
+## Version Control
+## Dependencies
+## [[Automating the Build]]
+## External Dependencies
+# Continuous Integration
+# Linting
+# Front-end Modularity
+# Cross-browser Testing
+# Conclusion

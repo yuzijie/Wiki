@@ -1,0 +1,21 @@
+created: 20150426100456225
+modified: 20150426110452654
+tags: Javascript Workflow
+title: Automating the Build
+type: text/vnd.tiddlywiki
+
+! Build Tools
+
+The Popular ones:
+
+# [[Gulp|http://gulpjs.com/]]
+# [[Grunt|http://gruntjs.com/]]
+# [[Brunch|http://brunch.io/]]
+# [[Harp|http://harpjs.com/]]
+# [[Brocolli|http://broccolijs.com]]
+# [[Jake|http://jakejs.com]]
+
+! Tips
+
+# ''Choose the tool that is easier to maintain.'' James Shore chooses [[Jake|http://jakejs.com]] because of that reason.
+# ''Install Dependencies to your local repo'', so that other team members will have dependencies automatically when they get the repo.

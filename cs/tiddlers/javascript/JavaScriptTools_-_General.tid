@@ -1,0 +1,26 @@
+caption: General
+created: 20150427095522169
+modified: 20150427102707055
+order: 1
+tags: Javascript Digest Development
+title: JavaScriptTools - General
+type: text/vnd.tiddlywiki
+
+!! Scaffolding Tools (for starting projects)
+
+* [[Yeoman|http://yeoman.io]] - Yeoman is a robust and opinionated client-side stack, comprising tools and frameworks that can help developers quickly build beautiful web applications.
+
+!! Build Tools (automation)
+
+* [[Grunt.js|http://gruntjs.com]] - The Grunt ecosystem is huge and it's growing every day. With literally hundreds of plugins to choose from, you can use Grunt to automate just about anything with a minimum of effort.
+** [[Pint.js|http://www.pintjs.com]] (Grunt helper) - Pint is a small, asynchronous, dependency-aware wrapper around Grunt, attempting to solve some of the problems that accompany a build process at scale.
+* [[Gulp.js|http://gulpjs.com]] - Gulp's use of streams and code-over-configuration makes for a simpler and more intuitive build.
+* [[Browserify.js|http://browserify.org]] (for browser) - Browserify is a development tool that allows us to write node.js-style modules that compile for use in the browser. Just like node, we write our modules in separate files, exporting external methods and properties using the module.exports and exports variables.
+* [[Uglify.js|https://marijnhaverbeke.nl/uglifyjs]] - Uglify.js is a JavaScript parser / mangler / compressor / beautifier library for NodeJS.
+
+!! Package Management Tools
+
+* [[Homebrew|http://brew.sh]] (Mac OS) - Homebrew installs the stuff you need that Apple didn't.
+* [[Apt|https://help.ubuntu.com/lts/serverguide/apt-get.html]] (Ubuntu) - The apt-get command is a powerful command-line tool, which works with Ubuntu's Advanced Packaging Tool (APT) performing such functions as installation of new software packages, upgrade of existing software packages, updating of the package list index, and even upgrading the entire Ubuntu system.
+* [[NPM|https://www.npmjs.com]] - npm is the official package manager for Node.js.
+* [[Bower|http://bower.io]] - Bower is a package manager for the web.

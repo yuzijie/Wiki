@@ -1,0 +1,46 @@
+created: 20150526064905744
+modified: 20150526071600800
+tags: Javascript Digest
+title: JavaScript Design Patterns
+type: text/vnd.tiddlywiki
+url: https://carldanley.com/javascript-design-patterns/
+
+<<<
+"One of the most important aspects of writing maintainable code is being able to notice the recurring themes in that code and optimize them. This is an area where knowledge of design patterns can prove invaluable." - [[Addy Osmani]]
+<<<
+
+!! Why design patterns are extremely useful
+
+* Patterns are an easy way to refer to a very specific implementation of code while avoiding the additional discussion it would take to get everyone on the same page if the vocabulary used for patterns didn't exist.
+* Patterns can help to thwart minor issues that can create major problems later down the road.
+* Patterns exemplify a level of sophistication that can provide both performance boosts and reduction of excess memory usage.
+* Patterns are established through rigorous testing which means they are, for the most part, "tried and true" and do aid in solving a particular type of problem.
+
+!! Creational Design Patterns
+
+Creational design patterns deal directly with object initialization procedures focusing on the creation of situation-specific objects. Without thinking about how objects are created, a level of complexity can be added to the design of an application. Creational design patterns work to solve this problem by adding a layer to the object creation process.
+
+{{creational-pattern-types.jpg}}
+
+!! Structural Design Patterns
+
+Structural design patterns are ones that focus on easing the relationship between different components of an application. They help to provide stability by ensuring that if one part of the app changes, the entire thing doesn't need to as well.
+
+{{structural-pattern-types.jpg}}
+
+!! Behavioral Design Patterns
+
+Behavioral design patterns emphasize flexibility through the identification of common communication patterns between various objects.
+
+{{behavioral-pattern-types.jpg}}
+
+!! Modern Day JavaScript Design Patterns
+
+* [[The Module Pattern]]
+* [[The Revealing Module Pattern]]
+* [[The Singleton Pattern]]
+* [[The Observer Pattern]]
+* [[The Mediator Pattern]]
+* [[The Prototype Pattern]]
+* [[The Facade Pattern]]
+* [[The Factory Patter]]

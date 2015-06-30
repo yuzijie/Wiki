@@ -1,0 +1,38 @@
+caption: Back End
+created: 20150427100821174
+modified: 20150427104552191
+order: 3
+tags: Development Digest Javascript
+title: JavaScriptTools - Back End
+type: text/vnd.tiddlywiki
+
+!! Servers
+
+* [[Express|http://expressjs.com]] - Express is a web application framework for Node.
+* [[Node|https://nodejs.org]] - NodeJS is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications.
+
+!! Databases
+
+* [[MongoDB|https://www.mongodb.org]] - MongoDB is an open-source document database, and the leading NoSQL database.
+* [[Postgresql|http://www.postgresql.org]] - PostgreSQL is a powerful, open source, object-relational database system.
+* [[SQL|http://www.sqlcourse.com/intro.html]] - [[SQL]] is used to communicate with a database. According to the American National Standards Institute, it is the standard language for relational database management systems.
+
+!! Architectural Style
+
+* [[RESTful|Representational State Transfer (REST)]] - Representational State Transfer is an architectural style consisting of a coordinated set of architectural constraints applied to components, connectors, and data elements, within a distributed hypermedia system.
+
+!! Testing
+
+* [[Cucumber.js|https://github.com/cucumber/cucumber-js]] - Cucumber.js takes the popular behavior-driven development tool and applies it to your JavaScript stack.
+* [[Jasmine|http://jasmine.github.io]] - Jasmine is a behavior-driven development testing framework for JavaScript. It does not rely on browsers, DOM, or any JavaScript framework. Thus it's suited for websites, Node.js projects, or anywhere that JavaScript can run.
+* [[Mocha|http://mochajs.org]] - Mocha is a feature-rich JavaScript test framework running on node.js and the browser, making asynchronous testing simple and fun.
+* [[Q-Unit|https://qunitjs.com]] - Q-Unit is a powerful, easy-to-use JavaScript unit testing framework. It's used by the jQuery, jQuery UI and jQuery Mobile projects and is capable of testing any generic JavaScript code.
+
+!! Assertion Libraries
+
+* [[Chai|http://chaijs.com]] - Chai is a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.
+
+!! Functional Programming Tools
+
+* [[Underscore.js|http://underscorejs.org]] - Underscore is a JavaScript library that provides a whole mess of useful functional programming helpers without extending any built-in objects.
+* [[Lo-Dash|https://lodash.com]] - Lo-Dash is a utility library delivering consistency, customization, and performance.
