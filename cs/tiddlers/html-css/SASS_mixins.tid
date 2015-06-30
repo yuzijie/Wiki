@@ -1,0 +1,41 @@
+created: 20150614153010446
+modified: 20150614153253210
+tags: CSS SASS
+title: SASS mixins
+type: text/vnd.tiddlywiki
+url: http://alistapart.com/article/getting-started-with-sass
+
+! How to use mixins
+
+```
+$highlight-color: #ffa;
+
+@mixin highlighted-bold-text {
+  font-weight: bold;
+  background-color: $highlight-color;
+}
+
+.result-with-highlights {
+  span {
+    @include highlighted-bold-text;
+  }
+}
+
+.highlighted {
+  @include highlighted-bold-text;
+}
+```
+
+```
+@mixin rounded-corners {
+  $rounded-corner-radius: 4px;
+  -webkit-border-radius: $rounded-corner-radius;
+  -moz-border-radius: $rounded-corner-radius;
+  -ms-border-radius: $rounded-corner-radius;
+  border-radius: $rounded-corner-radius;
+}
+
+.button {
+  @include rounded-corners;
+}
+```

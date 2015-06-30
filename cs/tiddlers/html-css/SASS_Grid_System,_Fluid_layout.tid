@@ -1,0 +1,39 @@
+created: 20150614154319377
+modified: 20150614154807815
+tags: SASS CSS
+title: SASS Grid System, Fluid layout
+type: text/vnd.tiddlywiki
+url: http://alistapart.com/article/getting-started-with-sass
+
+! SASS: Grid System, Fluid layout
+
+```
+.container {
+  // result = target / context
+  width: percentage(940px / 960px);
+
+  .main-content {
+    // This is nested inside of .container,
+    // so its context is 940px
+    width: percentage(620px / 940px);
+  }
+
+  .sidebar {
+    width: percentage(300px / 940px);
+  }
+}
+```
+
+!! CSS version
+
+```
+.container {
+  width: 97.917%;
+}
+.container .main-content {
+  width: 65.957%;
+}
+.container .sidebar {
+  width: 31.915%;
+}
+```

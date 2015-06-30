@@ -1,0 +1,74 @@
+created: 20150614153837927
+modified: 20150614154904861
+tags: SASS CSS
+title: SASS Grid System, Fix layout
+type: text/vnd.tiddlywiki
+url: http://alistapart.com/article/getting-started-with-sass
+
+! SASS Grid System, Fix layout with mixins
+
+```
+// Importing the clearfix mixin from a previous example
+@import './mixin_clearfix';
+
+// Setting up variables for a 940px, 12-column grid
+$column-width: 60px;    // 12 columns = 720px
+$gutter-width: 20px;    // 11 gutters = 220px
+
+@mixin grid-unit($span) {
+  float: left;
+  margin-right: $gutter-width;
+  width: ($column-width * $span) + ($gutter-width * ($span - 1));
+}
+
+.container {
+  @include clearfix;
+  @include grid-unit(12);
+  float: none;
+  margin: 0 auto;
+}
+
+.main-content {
+  @include grid-unit(8);
+}
+
+.sidebar {
+  @include grid-unit(4);
+  margin-right: 0;
+}
+```
+
+!! CSS version
+
+```
+.container {
+  float: left;
+  margin-right: 20px;
+  width: 940px;
+  float: none;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: table;
+}
+.container:after {
+  clear: both;
+}
+.container {
+  zoom: 1;
+}
+
+.main-content {
+  float: left;
+  margin-right: 20px;
+  width: 620px;
+}
+
+.sidebar {
+  float: left;
+  margin-right: 20px;
+  width: 300px;
+  margin-right: 0;
+}
+```
