@@ -1,0 +1,7 @@
+created: 20150507135651097
+modified: 20150507135655538
+tags: Definition
+title: MySQLi
+type: text/vnd.tiddlywiki
+
+The mysqli extension allows you to access the functionality provided by MySQL 4.1 and above.

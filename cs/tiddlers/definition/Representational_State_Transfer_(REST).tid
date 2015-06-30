@@ -1,0 +1,9 @@
+created: 20150427104108075
+modified: 20150427104259160
+tags: Definition
+title: Representational State Transfer (REST)
+type: text/vnd.tiddlywiki
+
+Representational State Transfer (REST) is a software architecture style consisting of guidelines and best practices for creating scalable web services. [[REST|Representational State Transfer (REST)]] is a coordinated set of constraints applied to the design of components in a distributed hypermedia system that can lead to a more performant and maintainable architecture.
+
+The [[REST|Representational State Transfer (REST)]] architectural style was developed by W3C Technical Architecture Group (TAG) in parallel with HTTP 1.1, based on the existing design of HTTP 1.0. The World Wide Web represents the largest implementation of a system conforming to the REST architectural style.

@@ -1,0 +1,7 @@
+created: 20150427101822235
+modified: 20150427102015037
+tags: Definition
+title: ColdFusion
+type: text/vnd.tiddlywiki
+
+ColdFusion is a commercial rapid web application development platform invented by Jeremy Allaire and JJ Allaire in 1995. (The programming language used with that platform is also commonly called ColdFusion, though is more accurately known as CFML.) ColdFusion was originally designed to make it easier to connect simple HTML pages to a database. By Version 2 (1996), it had become a full platform that included an IDE in addition to a "full" scripting language.
