@@ -1,0 +1,44 @@
+created: 20150526055903760
+modified: 20150526064813009
+tags: OSX Setup Server Apache
+title: Mac 如何设置 WebDav
+type: text/vnd.tiddlywiki
+url: https://gigaom.com/2010/10/01/how-to-enable-webdav-on-your-mac-for-iwork-on-ipad/
+
+!! 修改 httpd.conf
+
+* 文件路径：/etc/apache2/httpd.conf
+* 启动模块：`LoadModule dav_module libexec/apache2/mod_dav.so`
+* 包含配置文件：`Include /private/etc/apache2/extra/httpd-dav.conf`
+
+!! 修改 httpd-dav.conf
+
+* 文件路径：/etc/apache2/extra/httpd-dav.conf
+* 设置 URL 路径：`Alias /webdav "/Users/yu/webdav"`
+* 修改标签：`<Directory "/Users/yu/webdav">`
+* 修改用户名：`require user yu`
+* 可选：改 Digest 到 Basic，会不安全。
+
+<<<
+we specify the authentication scheme as //Basic//, not //Digest//. The security conscious will note that this sends unencrypted passwords over plain text. In my tests, ~OmniFocus was not able to communicate with the server with the Digest authentication scheme. Remember not to use a particularly important password for this account.
+<<<
+
+!! 创建新用户并添加密码
+
+* Digest 情况：`sudo htdigest -c "/usr/user.passwd" "AuthName" "YourUserName"`
+* Basic 情况：`sudo htpasswd -c "/usr/user.passwd" "YourUserName"`
+
+!! 添加必要的路径
+
+* `sudo mkdir -p /Users/yu/webdav`
+* `sudo mkdir -p /usr/var`
+
+!! 设置权限（非常重要）
+
+* `sudo chown -R www:www /Users/yu/webdav`
+* `sudo chown -R www:www /usr/var`
+* `sudo chgrp www /usr/user.passwd`
+
+!! 重启 Apache
+
+* `sudo apachectl restart`
