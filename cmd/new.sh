@@ -13,6 +13,8 @@ fi
 if [ -f ${CONFIG_DIR}/tiddlywiki.info ]; then
     mkdir ${NPM_ROOT}/$1
     cp ${CONFIG_DIR}/tiddlywiki.info ${NPM_ROOT}/$1/tiddlywiki.info
+    mkdir ${NPM_ROOT}/$1/tiddlers/
+    cp -r ${CONFIG_DIR}/global-conf ${NPM_ROOT}/$1/tiddlers/wiki-conf
     echo "Wiki creation done!"
 else
     echo "Cannot create new wiki, Please check your configuration files at $CONFIG_DIR"
