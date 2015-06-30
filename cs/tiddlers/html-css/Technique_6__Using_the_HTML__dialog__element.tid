@@ -1,0 +1,68 @@
+created: 20150607203942406
+modified: 20150607204449048
+tags: [[CSS Overlay Techniques]]
+title: Technique 6: Using the HTML <dialog> element
+type: text/vnd.tiddlywiki
+
+! Technique #6: Using the HTML `<dialog>` element
+
+The last technique we’ll talk about is a fairly new one, and a really awesome one! And it is the most semantic of all techniques if you’re creating an overlay for a dialog box or modal window.
+
+Modals can now be easily created and styled using the HTML `dialog` element. The `dialog` element provides in-page dialog box functionality. A dialog exists in the DOM tree and can be styled using ordinary CSS.
+
+<<<
+The dialog element represents a part of an application that a user interacts with to perform a task, for example a dialog box, inspector, or window. —WHATWG HTML Spec
+<<<
+
+The HTML dialog element has four main features, three of these features are what we’re most interested in when creating overlays (the fourth one is not yet implemented at the time of writing this article):
+
+# By default, a dialog is centered vertically in the viewport when opened. It is still absolutely positioned so it can be scrolled away. The viewport centering occurs regardless of the dialog’s position in the DOM tree.
+# Dialogs can be modal. When a modal dialog is opened, it blocks the rest of the document. There is a “pending dialog” stack to handle the case of multiple modal dialogs.
+# A new stacking layer on top of the existing CSS stacking contexts handles “always on top” behavior. Dialog and the Fullscreen spec both use the top layer. Modal dialogs reside in the top layer. So you don’t need to worry about setting a z-index manually to keep your modal on top of other elements on the page.
+
+Pretty awesome, right? The dialog element is centered by default, but as mentioned in the first point, it uses absolute positioning, so it can be scrolled away. You can override the default absolute position by setting the position to fixed in your style sheet. If you do decide to change the position to fixed, you’ll also have to set the `top` and `left` values and center it as well.
+
+The dialog element can be placed anywhere in the DOM.
+
+```
+<dialog class="modal">This is the dialog!</dialog>
+```
+
+It can be styled just like you would style any other block-level element.
+
+```
+.modal{
+  /* arbitrary styling */
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+  height:200px;
+  width:300px;
+
+  /* change position to fixed if you want to prevent the dialog from scrolling away, and center it */
+  position:fixed;
+  top:50%;
+  left:50%;
+  margin-left: -150px;
+  margin-top:-100px;
+}
+```
+
+The dialog element also comes with a pseudo element called `::backdrop`, which allows you to style the background behind a modal, thus creating the dimming overlay effect that we created in the previous five techniques, only this time, you can create that overlay easily by styling the pseudo-element which comes by default with the dialog element.
+
+So, to create an overlay effect using the HTML dialog element, you just apply a background color to its associated backdrop pseudo-element and position it to cover the area of the viewport like we did in a previous techniques:
+
+```
+.modal::backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+}
+```
+
+To make working with it even easier, dialog comes with an API which makes showing and hiding a modal a piece of cake, using functions like `show()` and `hide()`, among others.
+
+You can learn more about the dialog element and its API and see different live examples in [[this demo|http://demo.agektmr.com/dialog/]] by [[Eiji Kitamura|https://plus.google.com/+agektmr]]. The demo runs in a [[polyfill|https://github.com/GoogleChrome/dialog-polyfill]] mode when you’re viewing it in a browser that does not yet support the `dialog` element.

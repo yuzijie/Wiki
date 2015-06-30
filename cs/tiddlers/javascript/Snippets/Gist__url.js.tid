@@ -1,0 +1,25 @@
+created: 20150615152223444
+modified: 20150615152328506
+tags: Gist Examples CodeSnippet Javascript
+title: Gist: url.js
+type: text/vnd.tiddlywiki
+url: https://gist.github.com/jlong/2428561
+
+! Desc
+
+URI Parsing with Javascript
+
+! Code
+
+```
+var parser = document.createElement('a');
+parser.href = "http://example.com:3000/pathname/?search=test#hash";
+ 
+parser.protocol; // => "http:"
+parser.hostname; // => "example.com"
+parser.port;     // => "3000"
+parser.pathname; // => "/pathname/"
+parser.search;   // => "?search=test"
+parser.hash;     // => "#hash"
+parser.host;     // => "example.com:3000"
+```

@@ -1,0 +1,38 @@
+created: 20150607203849319
+modified: 20150607203911320
+tags: [[CSS Overlay Techniques]]
+title: Technique 5: Applying a large box shadow to a modal
+type: text/vnd.tiddlywiki
+
+! Technique #5: Applying a large box shadow to a modal
+
+The only difference between this technique and the previous one is that instead of applying a large outline to the modal, we’re going to apply a large box shadow to it.
+
+```
+.modal {
+    /* some styles to position the modal at the center of the page */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    line-height: 200px;
+    height: 200px;
+    margin-left: -150px;
+    margin-top: -100px;
+    background-color: #f1c40f;
+    text-align: center;
+    border-radius: 5px;
+  
+    /* needed styles for the overlay */
+    z-index: 10; /* keep on top of other elements on the page */
+    box-shadow: 0 0 0 999px rgba(0,0,0,0.5);
+}
+```
+
+Of course, the dark overlay resulting from this technique also does not prevent the interaction with the rest of the elements on the page behind the modal.
+
+Now, despite mentioning this technique as one of the possible ways to create overlays, I strongly advise you not to use it to create overlays. Even more, don’t use too many box shadows on your web pages/apps in general.
+
+Box shadows in combination with other styles like border-radius or when heavily used can cause a huge performance bottleneck, and can even render your app unusable on smartphones and tablets, as they tend to become very unresponsive with box-shadow-heavy applications.
+
+So, try to avoid using large box shadows in your applications or too many of them, as it will have a significantly bad impact on your app’s performance. If you find yourself in a situation where you need to use a lot of box shadows, you can at least try to remove those box shadows on smartphones and tablets by using one of the feature-detection techniques out there and providing fallback styles for these devices.

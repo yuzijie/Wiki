@@ -1,0 +1,11 @@
+created: 20150601103350600
+modified: 20150601103438260
+tags: CodeSnippet
+title: index.html - Node, npm and Browserify for frontend development
+type: text/vnd.tiddlywiki
+url: https://ampersandjs.com/learn/npm-browserify-and-modules
+
+```
+<!-- index.html -->
+<script src='app.bundle.js'></script>
+```

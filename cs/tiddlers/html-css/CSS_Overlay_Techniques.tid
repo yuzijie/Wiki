@@ -1,0 +1,28 @@
+created: 20150607182101184
+modified: 20150607204801573
+tags: CSS Digest
+title: CSS Overlay Techniques
+type: text/vnd.tiddlywiki
+url: http://tympanus.net/codrops/2013/11/07/css-overlay-techniques/
+
+One way to keep the user on the same page is by trying to include some of the experiences in the context of the current page, by displaying a “mini page”, or a pop-up dialog, in a lightweight layer over the current page. This lightweight layer is what we call an //overlay//.
+
+<<<
+Lightweight overlays can be used for asking questions, obtaining input, introducing features, indicating progress, giving instructions, or revealing information. They can be activated directly by user events (e.g., clicking on an action, hovering over objects) or be provided by the web application at various stages in the completion of an action.” — [[Designing Web Interfaces|http://shop.oreilly.com/product/9780596516253.do]]
+<<<
+
+{{Technique 1: Absolutely positioned element}}
+
+{{Technique 2: Element with fixed position}}
+
+{{Technique 3: Using a pseudo-element}}
+
+{{Technique 4: Applying a large outline to a modal}}
+
+{{Technique 5: Applying a large box shadow to a modal}}
+
+{{Technique 6: Using the HTML <dialog> element}}
+
+! Final Words
+
+I think we’ve covered pretty much all techniques that you can use to create a page overlay for modal windows. As you probably have guessed, the last technique using the `dialog` element is the best one for creating modal window or dialog overlays, but at the time of writing this article, it is only supported in Chrome Canary, behind a flag, with a [[polyfill|https://github.com/GoogleChrome/dialog-polyfill]] available. So you need to be careful about browser support if you attempt to use it today. But once support for it has been added in all major browsers, it will be the best way to create page overlays, with an awesome [[bunch of features|http://blog.teamtreehouse.com/a-preview-of-the-new-dialog-element]] available to work with it.

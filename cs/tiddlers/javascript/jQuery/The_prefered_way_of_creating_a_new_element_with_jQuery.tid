@@ -1,0 +1,18 @@
+created: 20150616093920882
+modified: 20150616094056634
+tags: StackOverflow Javascript
+title: The prefered way of creating a new element with jQuery
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/10619445/the-prefered-way-of-creating-a-new-element-with-jquery
+
+! Answer
+
+```
+var $div = $("<div>", {id: "foo", class: "a"});
+
+$div.click(function(){ /* ... */ });
+
+$("#box").append($div);
+```
+
+And of course `.html('*')` overrides the content while `.append('*')` doesn't, but I guess, this wasn't your question.

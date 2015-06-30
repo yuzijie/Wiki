@@ -1,0 +1,36 @@
+created: 20150605204826078
+modified: 20150605205329963
+tags: StackOverflow Javascript
+title: Abort Ajax requests using jQuery
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/4551175/how-to-cancel-abort-jquery-ajax-request
+
+! Answer
+
+The jquery ajax method returns a `XMLHttpRequest` object. You can use this object to cancel the request.
+
+The `XMLHttpRequest` has a `abort` method, which cancels the request.
+
+''Note'': If the request has already been sent to the server then the server will process the request even if we abort the request but the client will not wait for/handle the response.
+
+The `xhr` object also contains a `readystate` which contains the state of the request(`UNSENT-0`, `OPENED-1`, `HEADERS_RECEIVED-2`, `LOADING-3` and `DONE-4`). we can use this to check whether the previous request was completed.
+
+```
+$(document).ready(
+    var xhr;
+
+    var fn = function(){
+        if(xhr && xhr.readystate != 4){
+            xhr.abort();
+        }
+        xhr = $.ajax({
+            url: 'ajax/progress.ftl',
+            success: function(data) {
+                //do something
+            }
+        });
+    };
+
+    var interval = setInterval(fn, 500);
+);
+```

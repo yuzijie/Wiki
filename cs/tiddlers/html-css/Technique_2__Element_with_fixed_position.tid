@@ -1,0 +1,33 @@
+created: 20150607203422966
+modified: 20150607203549353
+tags: [[CSS Overlay Techniques]]
+title: Technique 2: Element with fixed position
+type: text/vnd.tiddlywiki
+
+! Technique #2: Element with fixed position
+
+The second way you could add an overlay is very similar to the previous one, and uses the same `.overlay` element in the markup, but instead of positioning the overlay absolutely, you give it a fixed position, and a full width and height to cover the entire viewport. And because the overlay in this case is fixed, no matter how far down you scroll, the overlay will stay in position, covering the whole viewport area, which if of course what we want.
+
+```
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5);
+}
+```
+
+<<<
+Whereas the position and dimensions of an element with position:absolute are relative to its containing block, the position and dimensions of an element with position:fixed are always relative to the initial containing block. This is normally the viewport: the browser window or the paper’s page box. — W3C Wiki
+<<<
+
+''Be careful!''
+
+<<<
+Here’s where things got really troublesome for me:  a transformed element creates a containing block even for descendants that have been set to position: fixed.  In other words, the containing block for a fixed-position descendant of a transformed element is the transformed element, not the viewport.  Furthermore, if the transformed element is in the normal flow, it will scroll with the document and the fixed-position descendants will scroll with it. 
+
+http://meyerweb.com/eric/thoughts/2011/09/12/un-fixing-fixed-elements-with-css-transforms/
+<<<

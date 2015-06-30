@@ -1,0 +1,34 @@
+created: 20150607203425784
+modified: 20150607203709566
+tags: [[CSS Overlay Techniques]]
+title: Technique 3: Using a pseudo-element
+type: text/vnd.tiddlywiki
+
+! Technique #3: Using a pseudo-element
+
+In order to avoid adding empty elements into our markup, we can use pseudo-elements to create the overlay instead.
+The styles and considerations in this technique are pretty much the same as the previous ones, except that instead of styling and positioning an empty element with a class `.overlay`, we’ll be styling the `:before` or `:after` pseudo-element on the body.
+
+```
+html, body {
+  min-height: 100%;
+}
+
+body {
+  position: relative; /* needed if you position the pseudo-element absolutely */
+}
+
+body:after {
+  content: "";
+  display: block;
+  position: fixed; /* could also be absolute */ 
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.2);
+}
+```
+
+An important thing to note here is that transitions on pseudo-elements still don’t work on Safari and Mobile Safari, so this is a huge drawback if you’re going to use a pseudo-element to create the overlay, because you won’t be providing your users with entirely smooth overlay effects. This is an important thing to keep in mind when you’re creating web apps that you want to feel like native apps on all devices and smartphones.

@@ -1,0 +1,18 @@
+created: 20150601102750489
+modified: 20150601103039579
+tags: CodeSnippet
+title: app.js - Node, npm and Browserify for frontend development
+type: text/vnd.tiddlywiki
+url: https://ampersandjs.com/learn/npm-browserify-and-modules
+
+```
+// ./my-project/app.js
+console.log('Welcome to my application')
+
+// require the local module
+var squareNumbers = require('./square-numbers');
+
+var input = [1,2,3,4];
+console.log('Input is:', input);
+console.log('Squared is:', squareNumbers(input));
+```

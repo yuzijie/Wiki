@@ -1,0 +1,60 @@
+created: 20150527005010150
+modified: 20150527005304497
+tags: Digest Javascript Examples
+title: How Do You Structure JavaScript? The Module Pattern Edition
+type: text/vnd.tiddlywiki
+url: https://css-tricks.com/how-do-you-structure-javascript-the-module-pattern-edition/
+
+! Key Elements
+
+* The Module itself
+* Settings Object
+* Init Function
+
+! Example
+
+```
+var s,
+NewsWidget = {
+
+  settings: {
+    numArticles: 5,
+    articleList: $("#article-list"),
+    moreButton: $("#more-button")
+  },
+
+  init: function() {
+    s = this.settings;
+    this.bindUIActions();
+  },
+
+  bindUIActions: function() {
+    s.moreButton.on("click", function() {
+      NewsWidget.getMoreArticles(s.numArticles);
+    });
+  },
+
+  getMoreArticles: function(numToGet) {
+    // $.ajax or something
+    // using numToGet as param
+  }
+
+};
+```
+
+Combining Files
+
+```
+//= require common/library.js
+
+//= require module/news-widget.js
+//= require module/some-other-widget.js
+
+(function() {
+
+  NewsWidget.init();
+
+  SomeOtherModule.init();
+
+})();
+```

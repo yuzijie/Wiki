@@ -1,0 +1,54 @@
+created: 20150525030250186
+modified: 20150525030846977
+tags: Javascript StackOverflow
+title: Declare a namespace in Javascript
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/881515/how-do-i-declare-a-namespace-in-javascript
+
+! Answer
+
+I use the approach found on the Enterprise jQuery site. Here is their example showing how to declare private & public properties and functions. Everything is done as a self-executing anonymous function.
+
+```
+(function(skillet, $, undefined) {
+    //Private Property
+    var isHot = true;
+
+    //Public Property
+    skillet.ingredient = "Bacon Strips";
+
+    //Public Method
+    skillet.fry = function() {
+        var oliveOil;
+
+        addItem( "\t\n Butter \n\t" );
+        addItem( oliveOil );
+        console.log( "Frying " + skillet.ingredient );
+    };
+
+    //Private Method
+    function addItem(item) {
+        if ( item !== undefined ) {
+            console.log( "Adding " + $.trim(item) );
+        }
+    }
+}(window.skillet = window.skillet || {}, jQuery));
+```
+
+What's really cool is that you can now extend the namespace using the exact same syntax.
+
+```
+//Adding New Functionality to the Skillet
+(function(skillet, $, undefined) {
+    //Private Property
+    var amountOfGrease = "1 Cup";
+
+    //Public Method
+    skillet.toString = function() {
+        console.log( skillet.quantity + " " + 
+                     skillet.ingredient + " & " + 
+                     amountOfGrease + " of Grease" );
+        console.log( isHot ? "Hot" : "Cold" );
+    };    
+}(window.skillet = window.skillet || {}, jQuery));
+```

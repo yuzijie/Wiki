@@ -1,0 +1,18 @@
+created: 20150601095501598
+modified: 20150601103555879
+tags: Node.js Javascript Digest
+title: Node, npm and Browserify for frontend development
+type: text/vnd.tiddlywiki
+url: https://ampersandjs.com/learn/npm-browserify-and-modules#commonjs-modules
+
+''The flow of creating a very simple web application''
+
+# `mkdir my-project && cd my-project` - create a project directory
+# `npm init` - create a package.json for your project which stores your dependencies and their versions
+# `npm install browserify --save-dev` - install browserify as a development only dependency
+# `npm install underscore --save` - install a dependency you want to use in your application
+# create a module in your application, say `square-numbers.js`<$transclude tiddler="square-numbers.js - Node, npm and Browserify for frontend development" mode="block"/>
+# create the main `app.js` file for your application, which requires your module<$transclude tiddler="app.js - Node, npm and Browserify for frontend development" mode="block"/>
+# `./node_modules/.bin/browserify app.js -o app.bundle.js` - use browserify to compile your application down into a single file.
+# create a very simple `index.html` that loads your bundle:<$transclude tiddler="index.html - Node, npm and Browserify for frontend development" mode="block"/>
+# `open index.html` - open index.html in a browser, and check the console output.

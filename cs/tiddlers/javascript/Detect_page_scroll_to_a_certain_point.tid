@@ -1,0 +1,28 @@
+created: 20150513122317635
+modified: 20150513122543422
+tags: Javascript Digest
+title: Detect page scroll to a certain point
+type: text/vnd.tiddlywiki
+url: http://ejohn.org/blog/learning-from-twitter/
+
+# ''It’s a very, very, bad idea to attach handlers to the window scroll event.''
+# ''Always cache the selector queries that you’re re-using.''
+
+Thus, combining these two techniques, the resulting code would look something like:
+
+```
+var outerPane = $details.find(".details-pane-outer"),
+    didScroll = false;
+ 
+$(window).scroll(function() {
+    didScroll = true;
+});
+ 
+setInterval(function() {
+    if ( didScroll ) {
+        didScroll = false;
+        // Check your page position and then
+        // Load in more results
+    }
+}, 250);
+```

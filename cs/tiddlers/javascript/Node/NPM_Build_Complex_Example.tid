@@ -1,0 +1,52 @@
+created: 20150630202400505
+modified: 20150630203143733
+tags: Node.js Javascript
+title: NPM Build Complex Example
+type: text/vnd.tiddlywiki
+
+! Goals
+
+* Take my JS and lint, test & compile it into 1 versioned file (with a separate sourcemap) and upload it to S3
+* Compile Stylus into CSS, down to a single, versioned file (with separate sourcemap), upload it to S3
+* Add watchers for testing and compilation
+* Add a static file server to see my single page app in a web browser
+* Add livereload for CSS and JS
+* Have a task that combines all these files so I can type one command and spin up an environment
+* For bonus points, open a browser window automagically pointing to my website
+
+! Example
+
+I've chucked up a simple repository on GitHub called [[npm-scripts-example|https://github.com/keithamus/npm-scripts-example]]. It contains the layout for a basic website, and a package.json to fit the above tasks. The lines you're probably interested in are:
+
+```
+"scripts": {
+    "clean": "rimraf dist/*",
+
+    "prebuild": "npm run clean -s",
+    "build": "npm run build:scripts -s && npm run build:styles -s && npm run build:markup -s",
+    "build:scripts": "browserify -d assets/scripts/main.js -p [minifyify --compressPath . --map main.js.map --output dist/main.js.map] | hashmark -n dist/main.js -s -l 8 -m assets.json 'dist/{name}{hash}{ext}'",
+    "build:styles": "stylus assets/styles/main.styl -m -o dist/ && hashmark -s -l 8 -m assets.json dist/main.css 'dist/{name}{hash}{ext}'",
+    "build:markup": "jade assets/markup/index.jade --obj assets.json -o dist",
+
+    "test": "karma start --singleRun",
+
+    "watch": "parallelshell \"npm run watch:test -s\" \"npm run watch:build -s\"",
+    "watch:test": "karma start",
+    "watch:build": "nodemon -q -w assets/ --ext '.' --exec 'npm run build'",
+
+    "open:prod": "opener http://example.com",
+    "open:stage": "opener http://staging.example.internal",
+    "open:dev": "opener http://localhost:9090",
+
+    "deploy:prod": "s3-cli sync ./dist/ s3://example-com/prod-site/",
+    "deploy:stage": "s3-cli sync ./dist/ s3://example-com/stage-site/",
+
+    "serve": "http-server -p 9090 dist/",
+    "live-reload": "live-reload --port 9091 dist/",
+
+    "dev": "npm run open:dev -s & parallelshell \"npm run live-reload -s\" \"npm run serve -s\" \"npm run watch -s\""
+}
+```
+
+If you're wondering what the `-s` flag is, it just [[silences output from npm|https://docs.npmjs.com/misc/config#default-configs]] on those tasks, cleaning up the log output, try disabling them to see the difference.
+

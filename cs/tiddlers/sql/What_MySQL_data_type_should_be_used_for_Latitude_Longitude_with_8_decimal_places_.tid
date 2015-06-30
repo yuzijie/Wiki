@@ -1,0 +1,16 @@
+created: 20150530172125037
+modified: 20150530172301817
+tags: StackOverflow SQL
+title: What MySQL data type should be used for Latitude/Longitude with 8 decimal places?
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/12504208/what-mysql-data-type-should-be-used-for-latitude-longitude-with-8-decimal-places
+
+! Answer
+
+''DECIMAL'' is the MySQL data-type for exact arithmetic. Unlike FLOAT its precision is fixed for any size of number, so by using it instead of FLOAT you might avoid precision errors when doing some calculations. If you were just storing and retrieving the numbers without calculation then in practice FLOAT would be safe, although there's no harm in using DECIMAL. With calculations FLOAT is still mostly ok, but to be absolutely sure of 8d.p. precision you should use DECIMAL.
+
+Latitudes range from -90 to +90 (degrees), so DECIMAL(10, 8) is ok for that, but longitudes range from -180 to +180 (degrees) so you need DECIMAL(11, 8). The first number is the total number of digits stored, and the second is the number after the decimal point.
+
+In short: `lat DECIMAL(10, 8) NOT NULL, lng DECIMAL(11, 8) NOT NULL`
+
+[[This|http://dev.mysql.com/doc/refman/5.0/en/problems-with-float.html]] explains how MySQL works with floating-point data-types.

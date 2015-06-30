@@ -1,0 +1,64 @@
+created: 20150615092121194
+modified: 20150615092856529
+tags: Ruby StackOverflow
+title: Ruby class inheritance: What is << (double less than)?
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/6182628/ruby-class-inheritance-what-is-double-less-than
+
+! Answer
+
+While it's true that `class << something` is the syntax for a singleton class, as someone else said, it's most often used to define class methods within a class definition. But these two usages are consistent. Here's how.
+
+Ruby lets you add methods to any particular instance by doing this:
+
+```
+class << someinstance
+  def foo
+    "Hello."
+  end
+end
+```
+
+This adds a method `foo` to someinstance, not to its class but to that one particular instance. (Actually, foo is added to the instance's "singleton class," but that's more or less an implementation quirk.) After the above code executes, you can send method foo to someinstance:
+
+```
+someinstance.foo   => "Hello."
+```
+
+but you can't send foo to other instances of the same class. That's what `<<` is nominally for. But people more commonly use this feature for syntactic gymnastics like this:
+
+```
+class Thing
+  def do_something
+  end
+
+  class << self
+    def foo
+      puts "I am #{self}"
+    end
+  end
+end
+```
+
+When this code -- this class definition -- executes, what is `self`? It's the class `Thing`. Which means `class << self` is the same as saying "add the following methods to class `Thing`." That is, foo is a class method. After the above completes, you can do this:
+
+```
+t = Thing.new
+t.do_something  => does something
+t.class.foo     => "I am Thing"
+t.foo           => NoMethodError: undefined method `foo'
+```
+
+And when you think about what `<<` is doing, it all makes sense. It's a way to append to a particular instance, and in the common case, the instance being appended to is a class, so the methods within the block become class methods.
+
+In short, it's a terse way to create class methods within a class definition block. Another way would be to do this:
+
+```
+class Thing
+  def self.foo
+    # ...
+  end
+end
+```
+
+Same thing.

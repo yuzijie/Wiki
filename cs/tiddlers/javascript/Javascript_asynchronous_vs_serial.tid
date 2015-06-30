@@ -1,0 +1,76 @@
+created: 20150601155831587
+modified: 20150601162223761
+tags: Javascript Digest
+title: Javascript asynchronous vs serial
+type: text/vnd.tiddlywiki
+url: http://travistidwell.com/presentations/jquery-node-phantom/#/7
+
+! Serial
+
+!! Serial execution with dependency.
+
+```
+function getSomething() {
+  return 'something';
+}
+
+function saySomething(what) {
+  console.log(what);
+}
+
+var something = getSomething();
+saySomething(something);
+```
+
+result
+
+```
+something
+```
+
+!! Serial execution but produce Error
+
+```
+function getSomething() {
+  http.get('http://google.com', function(response) {
+    return response; // ??????
+  }); // returns nothing... undefined
+}
+
+function saySomething(what) {
+  console.log(what);
+}
+
+var something = getSomething(); // something = undefined
+saySomething(something);
+```
+
+return 
+
+```
+undefined
+```
+
+! Asynchronous
+
+```
+function getSomething(callback) {
+  http.get('http://google.com', function(response) {
+    callback(response);
+  });
+}
+
+function saySomething(what) {
+  console.log(what);
+}
+
+getSomething(function(what) {
+  saySomething(what);
+});
+```
+
+result
+
+```
+something
+```

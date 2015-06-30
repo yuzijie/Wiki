@@ -1,0 +1,27 @@
+created: 20150616001858166
+modified: 20150616002642990
+tags: StackOverflow Git
+title: How can I remove a commit on GitHub
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/448919/how-can-i-remove-a-commit-on-github
+
+! Answer 1
+
+# `git reset --soft HEAD^` 恢复上一次的 commit
+# `git reset HEAD`
+# `git checkout` 回复之前删除的文件
+# `git push origin +master` 加号是强制同步的意思。
+
+See [[Git Magic Chapter 5: Lessons of History|http://www-cs-students.stanford.edu/~blynn/gitmagic/ch05.html#_8230_and_then_some]] for more information (i.e. if you want to remove older commits).
+
+Oh, and if your working tree is dirty, you have to do a `git stash` first, and then a `git stash apply` after.
+
+! Answer 2
+
+```
+git push -f origin HEAD^:master
+```
+
+That should "undo" the push.
+
+''This worked fine too! It removes the push from github but leaves my local repository intact.''

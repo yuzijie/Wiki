@@ -1,0 +1,71 @@
+created: 20150626112216361
+modified: 20150626165405183
+tags: Node.js Javascript
+title: npm Scripts
+type: text/vnd.tiddlywiki
+
+! npm Scripts
+
+Command: `npm run-script $1` or `npm run $1`
+
+The first argument passed to `npm run` refers to a property in the `scripts` object - it will execute the property's value as a command in the operating systems default shell.
+
+Also, there's a whole slew of super convenient environment variables that npm exposes, such as the currently running task, the package name and version, npm loglevel, and so on. Find them all out by making a script that runs `env`, and running it, like so:
+
+```
+"scripts": {
+    "env": "env"
+}
+```
+
+!! Shortcut scripts
+
+* `npm test` is short for `npm run test`
+* `npm start` is short for `npm run start`
+* `npm stop` is short for `npm run stop`
+
+It provides a standard interface within npm for testing, starting and stopping a package.
+
+!! Pre and Post Hooks
+
+Another cool feature about npm is that any script that can be executed also has a set of `pre-` and `post-` hooks, which are simply definable in the `scripts` object. For example, if you execute `npm run lint`, despite npm having no preconceived idea of what the lint task is, it will immediately run `npm run prelint`, followed by `npm run lint`, followed by `npm run postlint`.
+
+!! Passing Arguments
+
+```
+"scripts": {
+    "test": "mocha test/",
+    "test:xunit": "npm run test -- --reporter xunit"
+}
+```
+
+* For example `npm run test -- anothertest.js` will run `mocha test/ anothertest.js`,
+* or more usefully `npm run test -- --grep parser` will expand to `mocha test/ --grep parser` (which runs only the tests with "parser" in the title).
+* In the package.json we have `test:xunit` which effectively runs `mocha test --reporter xunit`.
+* This setup can be incredibly useful for composing commands together for some advanced configurations.
+* 仅输入 `npm run test --grep parser`，结果是 `mocha test/ parser`，参数 `--grep` 是被忽略的。
+
+!! NPM Config Variables
+
+One last thing that is worth mentioning - npm has a [[config directive|https://www.npmjs.org/doc/misc/npm-config.html#per-package-config-settings]] for your package.json. This lets you set arbitrary values which can be picked up as environment variables in your `scripts` object.
+
+```
+"name": "fooproject",
+"config": {
+  "reporter": "xunit"
+},
+"scripts": {
+  "test": "mocha test/ --reporter $npm_package_config_reporter"
+  "test:dev": "npm run test --fooproject:reporter=spec"
+}
+```
+
+All config options are exposed as environment variables prefixed with `npm_package_config_`. In the above example, the npm run test command uses the `$npm_package_config_mocha_reporter` variable which gets expanded to `mocha test/ --reporter xunit`.
+
+This can get replaced in two convinient ways:
+
+# Just like the `test:dev` task, you can change the reporter config variable to //spec// - by using `--fooproject:reporter`.
+# They can also be overriden as part of a user's config. By running `npm config set fooproject:reporter spec` - an entry in my `~/.npmrc` appears (fooproject:reporter=spec) which is read at runtime, and overrides the npm_package_config_reporter variable, meaning that on my local machine, forever more, npm run test gets expanded to mocha test/ --reporter spec.
+# I can remove my personalised setting for this using `npm config delete fooproject:mocha_reporter`. A good set up for this is to have some sensible defaults in your `package.json` - but your own customisations can be tucked away inside your own `~/.npmrc`.
+
+The downside to these configs is that they're not very Windows friendly - Windows uses `%` for variable substitution, while bash uses `$`. But they work fine if you use them within a Node.js script.

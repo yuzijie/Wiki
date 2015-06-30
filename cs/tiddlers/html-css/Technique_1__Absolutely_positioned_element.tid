@@ -1,0 +1,70 @@
+created: 20150607203257013
+modified: 20150607203333930
+tags: [[CSS Overlay Techniques]]
+title: Technique 1: Absolutely positioned element
+type: text/vnd.tiddlywiki
+
+! Technique #1: Absolutely positioned element
+
+The first way that an overlay can be created is by absolutely positioning an HTML element on the page. There would be an empty `div` in the markup, and with CSS this div is positioned absolutely and given a high `z-index` value to make sure it stays on top of all other elements on the page, except the modal which is opened on top of this overlay, which will get a even higher `z-index` than the overlay.
+
+```
+<html>
+  <body>
+    <div class="overlay"></div>
+    <div class="modal">I'm the modal window!</div>
+    <div class="content">
+      <h1>Creating an Overlay with an Absolutely Positioned Element</h1>
+      Lorem ipsum dolor sit amet......
+    </div>
+  <body>
+<html>
+```
+
+Supposing we have already added an empty div to the markup and given it a class .overlay, the CSS to position this overlay on the page is:
+
+```
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    position: relative;  /* needed for the overlay to extend when you scroll */
+    /* general styles */
+    padding: 30px;
+    background: #f1c40f;
+    color: #fff;
+}
+
+/* overlay styles, all needed */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+/* just some content with arbitrary styles for explanation purposes */
+.modal {
+    width: 300px;
+    height: 200px;
+    line-height: 200px;
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+    background-color: #f1c40f;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 11; /* 1px higher than the overlay layer */
+}
+
+.content {
+    margin: 30px;
+}
+```

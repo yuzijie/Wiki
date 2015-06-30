@@ -1,0 +1,176 @@
+created: 20150621171316194
+modified: 20150621175613721
+tags: Digest CSS
+title: Methods For Vertical Centering With CSS
+type: text/vnd.tiddlywiki
+url: http://www.vanseodesign.com/css/vertical-centering/
+
+! 1. Line-Height Method
+
+html
+
+```
+<div id="parent">
+    <div id="child">Text here</div>
+</div>
+```
+
+css
+
+```
+#child {
+    line-height: 200px;
+}
+```
+
+The above works in all browsers, however it will only work for a ''single line'' of text. If your text could wrap to a 2nd line you need to use a different method. The value of 200px above is arbitrary. You can use any value you want as long as its larger than the font-size that’s been set.
+
+!! Centering an Image with Line-Height
+
+html
+
+```
+<div id="parent">
+    <img src="image.png" alt="" />
+</div>
+```
+
+css
+
+```
+#parent {
+    line-height: 200px;
+}
+
+#parent img {
+    vertical-align: middle;
+}
+```
+
+You set the line-height as we did above (''It’ll need to be greater than the height of the image'') and then set vertical-align: middle on the image.
+
+! 2. CSS Table Method
+
+html
+
+```
+<div id="parent">
+    <div id="child">Content here</div>
+</div>
+```
+
+css
+
+```
+#parent {display: table;}
+
+#child {
+    display: table-cell;
+    vertical-align: middle;
+}
+```
+
+Unlike method 1 the content can be dynamic as the div will grow with what’s placed inside. The downside of this method is it doesn’t work in older versions of IE, though there is a fix, which is to add `display: inline-block` to the child element.
+
+```
+#child {
+    display: inline-block;
+}
+```
+
+! 3. Absolute Positioning and Negative Margin
+
+This method works for block level elements and also works in all browsers. It does require that we set the height of the element we want to center.
+
+html
+
+```
+<div id="parent">
+    <div id="child">Content here</div>
+</div>
+```
+
+css
+
+```
+#parent {position: relative;}
+
+#child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    margin: -15% 0 0 -25%;
+}
+```
+
+这种方法需要知道 Height 和 Width，或者可以用 `Transform` ，这样就不需要知道 child element 的高度和宽度了。
+
+```
+#parent {position: relative;}
+
+#child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+```
+
+! 4. Absolute Positioning and Stretching
+
+html
+
+```
+<div id="parent">
+    <div id="child">Content here</div>
+</div>
+```
+
+css
+
+```
+#parent {position: relative;}
+
+#child {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%; //缺点是必须加入宽和高
+    height: 30%;
+    margin: auto;
+}
+```
+
+The idea with this method is to try to get the child element to stretch to all 4 edges by setting the top, bottom, right, and left vales to 0. Because our child element is smaller than our parent elements it can’t reach all 4 edges.
+
+Setting auto as the margin on all 4 sides however causes opposite margins to be equal and displays our child div in the center of the parent div.
+
+Unfortunately the above won’t work in IE7 and below and like the previous method the content inside the child div can grow too large causing it to be hidden.
+
+! 5. Equal Top and Bottom Padding
+
+In the method above we allowed the browser to automatically set the margins of the child element so they would be equal. In this method we’ll do something similar and explicitly set the top and bottom padding of the parent to be equal.
+
+html
+
+```
+<div id="parent">
+    <div id="child">Content here</div>
+</div>
+```
+
+css
+
+```
+#parent {
+    padding: 5% 0;
+}
+
+#child {
+    padding: 10% 0;
+}
+```

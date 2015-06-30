@@ -1,0 +1,20 @@
+created: 20150512152956384
+modified: 20150512153324822
+tags: PHP StackOverflow
+title: PHP array delete by value
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/7225070/php-array-delete-by-value-not-key
+
+! Answer
+
+Using `array_search()` and `unset`, try the following:
+
+```
+if(($key = array_search($del_val, $messages)) !== false) {
+    unset($messages[$key]);
+}
+```
+
+`array_search()` returns the key of the element it finds, which can be used to remove that element from the original array using `unset()`. It will return `FALSE` on failure, however it can return a falsey value on success (your key may be 0 for example), which is why the strict comparison !== operator is used.
+
+The `if()` statement will check whether `array_search()` returned a value, and will only perform an action if it did.
