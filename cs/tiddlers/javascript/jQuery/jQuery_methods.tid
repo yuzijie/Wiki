@@ -1,0 +1,12 @@
+created: 20150610193410797
+modified: 20150610193813929
+tags: Javascript
+title: jQuery methods
+type: text/vnd.tiddlywiki
+
+* .end()
+* .map()
+* .stop()
+* .extend()
+* .proxy()
+

@@ -1,0 +1,53 @@
+created: 20150602123322944
+modified: 20150602125842098
+tags: Javascript Digest
+title: jQuery: Using Only What You Need
+type: text/vnd.tiddlywiki
+url: http://developer.telerik.com/featured/jquery-using-only-what-you-need/
+
+! 1. Setup project
+
+To use the new modules, you need an AMD-ready project.
+
+# npm install bower
+# bower install jquery
+# bower install requirejs
+
+''The key is to have jQuery’s individual source files available, and not a single jquery.js file.''
+
+! index.html
+
+With the libraries in place, create an index.html that looks like this
+
+```
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery Snippets</title>
+</head>
+<body>
+
+<script src="bower_components/requirejs/require.js"></script>
+<script>
+  require.config({
+    paths: {
+      "jquery": "bower_components/jquery/src",
+      "sizzle": "bower_components/jquery/external/sizzle/dist/"
+    }
+  });
+  require([ "app" ]);
+</script>
+
+</body>
+</html>
+```
+
+The require.config call tells RequireJS where it can find find the “jquery” and “sizzle” dependencies — which are strings that jQuery uses internally.
+
+! Modules
+
+The following code snippets work if they are used as the contents of app.js in the structure above. For each snippet I’ll provide the size of jQuery using the dependencies specified. You can compare the specified sizes to the overall size of jQuery 2.1.1, which is 82K (29K gzipped).
+
+Keep in mind that the sizes of the snippets are not additive because some dependencies are shared. For example document ready requires 11K, and Ajax requires 13K (both gzipped), but their combined size is 14K gzipped, not 24K.
+
