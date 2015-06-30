@@ -1,0 +1,84 @@
+created: 20150427105749085
+modified: 20150427110105618
+tags: Examples Javascript
+title: Contenteditable
+type: text/vnd.tiddlywiki
+url: http://jsbin.com/owavu3/1/edit?html,css,js,output
+
+! HTML
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>JS Bin</title>
+<style>
+[contenteditable]:hover:after {
+  content: ' click to edit';
+  font-style: italic;
+  font-size: 12px;
+  font-family: sans-serif;
+  color: #ccc;
+  .text-stroke(0);
+}
+
+[contenteditable]:hover, [contenteditable]:focus {
+  background: #FFFFD3;
+}
+
+[contenteditable]:focus {
+  padding: 5px;
+}
+
+[contenteditable]:focus:after {
+  content: '';
+}
+</style>
+</head>
+<body>
+  <p contenteditable data-name="title" id="hello">Hello World</p>
+  <div id="debug"></div>
+</body>
+</html>
+```
+
+! Javascript
+
+```
+document.addEventListener('keydown', function (event) {
+  var esc = event.which == 27,
+      nl = event.which == 13,
+      el = event.target,
+      input = el.nodeName != 'INPUT' && el.nodeName != 'TEXTAREA',
+      data = {};
+
+  if (input) {
+    if (esc) {
+      // restore state
+      document.execCommand('undo');
+      el.blur();
+    } else if (nl) {
+      // save
+      data[el.getAttribute('data-name')] = el.innerHTML;
+
+      // we could send an ajax request to update the field
+      /*
+      $.ajax({
+        url: window.location.toString(),
+        data: data,
+        type: 'post'
+      });
+      */
+      log(JSON.stringify(data));
+
+      el.blur();
+      event.preventDefault();
+    }
+  }
+}, true);
+
+function log(s) {
+  document.getElementById('debug').innerHTML = 'value changed to: ' + s;
+}
+```

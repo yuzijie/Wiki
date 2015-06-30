@@ -1,0 +1,58 @@
+created: 20150424115606170
+modified: 20150424120853513
+tags: HTML 待分拆
+title: HTML 5 Tags
+type: text/vnd.tiddlywiki
+
+!! section
+
+The `<section>` tag defines sections in a document, such as chapters, headers, footers, or any other sections of the document.
+
+!! aside
+
+The `<aside>` tag defines some content aside from the content it is placed in.
+
+The aside content should be related to the surrounding content.
+
+!! article
+
+The `<article>` tag specifies independent, self-contained content.
+
+An article should make sense on its own and it should be possible to distribute it independently from the rest of the site.
+
+Potential sources for the `<article>` element:
+
+* Forum post
+* Blog post
+* News story
+* Comment
+
+!! header
+
+The `<header>` element represents a container for introductory content or a set of navigational links.
+
+A `<header>` element typically contains:
+
+* one or more heading elements (`<h1> - <h6>`)
+* logo or icon
+* authorship information
+* You can have several `<header>` elements in one document.
+
+Note: A `<header>` tag cannot be placed within a `<footer>`, `<address>` or another `<header>` element.
+
+!! footer
+
+The `<footer>` tag defines a footer for a document or section.
+
+A `<footer>` element should contain information about its containing element.
+
+A `<footer>` element typically contains:
+
+* authorship information
+* copyright information
+* contact information
+* sitemap
+* back to top links
+* related documents
+
+You can have several `<footer>` elements in one document.

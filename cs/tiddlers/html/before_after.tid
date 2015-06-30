@@ -1,0 +1,32 @@
+created: 20150424100111966
+modified: 20150424125345930
+tags: CSS
+title: before/after
+type: text/vnd.tiddlywiki
+url: https://css-tricks.com/almanac/selectors/a/after-and-before/
+
+`::after` is a pseudo element which allows you to insert content onto a page from CSS (without it needing to be in the HTML). While the end result is not actually in the DOM, it appears on the page as if it is, and would essentially be like this:
+
+CSS:
+
+```
+div::after {
+  content: "hi";
+}
+```
+
+HTML:
+
+```
+<div>
+  <!-- Rest of stuff inside the div -->
+  hi
+</div>
+```
+
+!! The value for ''content'' can be:
+
+* A string: `content: "a string";` - special characters need to be specially encoded as a ''unicode entity''.
+* An image: `content: url(/path/to/image.jpg);` - The image is inserted at it's exact dimensions and cannot be resized. Since things like ''gradients'' are actually images, a pseudo element can be a ''gradient''.
+* Nothing: `content: "";` - Useful for clearfix and inserting images as background-images (set width and height, and can even resize with background-size).
+* A counter: `content: counter(li);` - Really useful for styling lists until `:marker` comes along.

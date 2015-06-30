@@ -1,0 +1,13 @@
+created: 20150424125012542
+modified: 20150424125300936
+tags: CSS
+title: box-sizing
+type: text/vnd.tiddlywiki
+url: http://www.w3schools.com/cssref/css3_pr_box-sizing.asp
+
+The box-sizing property is used to tell the browser what the sizing properties (width and height) should include.
+
+* ''content-box'' (Default): The width and height properties (and min/max properties) includes only the content. Border, padding, or margin are not included.
+* ''border-box'': The width and height properties (and min/max properties) includes content, padding and border, but not the margin.
+* ''initial'': Sets this property to its default value.
+* ''inherit'': Inherits this property from its parent element.

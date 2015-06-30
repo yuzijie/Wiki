@@ -1,0 +1,50 @@
+created: 20150418082954079
+modified: 20150418083337385
+tags: Bootstrap StackOverflow
+title: Navbar fixed to top but not full-width
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/12571540/navbar-fixed-to-top-but-not-full-width
+
+! Answer
+
+You can create a navbar-fixed-top or nav-bar-fixed-bottom without having it become full-width and responsive to any screen size .
+
+''Step 1: add those css :(I create a css class called: .navbar-fixed-width)''
+
+```
+@media all and (min-width: 768px) {
+  .navbar-fixed-width {
+    width: 768px;
+    margin-left: auto;
+    margin-right:auto;
+ }
+}
+
+@media all and (min-width: 992px) {
+  .navbar-fixed-width {
+    width: 992px;
+    margin-left: auto;
+    margin-right:auto;
+  }
+
+}
+
+@media all and (min-width: 1200px) {
+  .navbar-fixed-width {
+    width: 1200px;
+    margin-left: auto;
+    margin-right:auto;
+  }
+}
+```
+
+''step 2: .navbar-fixed-width class to navigation like this.''
+
+```
+<div class="navbar navbar-inverse navbar-fixed-top navbar-fixed-width" role="navigation">
+    <div class="container">
+         <div class="navbar-header">
+         </div>
+    </div>
+</div>
+```

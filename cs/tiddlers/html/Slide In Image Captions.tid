@@ -1,0 +1,67 @@
+created: 20150424090753554
+modified: 20150424150025747
+tags: Digest CSS
+title: Slide In Image Captions
+type: text/vnd.tiddlywiki
+url: https://css-tricks.com/slide-in-image-captions/
+
+! HTML 5 Structure
+
+An image with caption:
+
+```
+<figure>
+	<img src="yay.jpg" alt="">
+	<figcaption>
+		yay!!!
+	</figcaption>
+</figure>
+```
+
+! CSS Structure
+
+The `figure` will need to have `position: relative;` so we can absolutely position the caption exactly where we want it and not have it take up any additional space.
+
+We also need `overflow: hidden;` so as we do our sliding, the caption disappears outside the boundary of the `figure`.
+
+```
+figure { 
+  display: block; 
+  position: relative; 
+  overflow: hidden; 
+}
+
+figcaption { 
+  position: absolute; 
+  background: rgba(0,0,0,0.75); 
+  color: white; 
+  padding: 10px 20px; 
+}
+```
+
+! Hot Sliding Action
+
+Let's position the caption slightly beyond the lower left and hide it entirely with opacity. Then when the figure is hovered, we'll slide it into place and adjust the opacity back up.
+
+```
+figcaption { 
+  position: absolute; 
+  background: rgba(0,0,0,0.75); 
+  color: white; 
+  padding: 10px 20px; 
+
+  opacity: 0;
+  bottom: 0; 
+  left: -30%;
+  -webkit-transition: all 0.6s ease;
+  -moz-transition:    all 0.6s ease;
+  -o-transition:      all 0.6s ease;
+}
+
+figure:hover figcaption {
+  opacity: 1;
+  left: 0;
+}
+```
+
+[[我的作品|https://drive.google.com/open?id=0B6sObx0p_r5fWGRjZG5UU0FUY28&authuser=0]]

@@ -1,0 +1,58 @@
+created: 20150424115344982
+modified: 20150424123313048
+tags: CSS
+title: clear
+type: text/vnd.tiddlywiki
+url: http://stackoverflow.com/questions/12871710/what-does-the-css-rule-clear-both-do
+
+主要作用是清除之前 element 的 float 属性。
+
+HTML
+
+```
+<div>
+    <section>Normal Flow</section>
+    <section>Normal Flow</section>
+    <div class="clear"></div>
+</div>
+```
+
+CSS
+
+```
+div {
+    background-color: #f00;
+}
+
+section {
+    float: left;
+    height: 100px;
+    border: 1px solid #000;
+}
+
+.clear {
+    clear: both;
+}
+```
+
+!! 图片解释
+
+''Before''
+
+<<<
+when the object is floated to left, the container element won't know the dimensions of the floated elements and hence it won't stretch to the floated elements height.
+<<<
+
+{{vmmUS.jpg}}
+
+''After''
+
+<<<
+After using `clear: both;`, the container element will be stretched to its floated element dimensions.
+<<<
+
+{{MjP6D.jpg}}
+
+<<<
+Another reason the `clear: both;` is used is to prevent the element to shift up in the remaining space.
+<<<
