@@ -1,0 +1,7 @@
+created: 20150702175711588
+modified: 20150702175715823
+tags: Javascript
+title: jQuery method: unbind
+type: text/vnd.tiddlywiki
+
+''Description'': Remove a previously-attached event handler from the elements.

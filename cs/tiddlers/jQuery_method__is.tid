@@ -1,0 +1,9 @@
+created: 20150702170258815
+modified: 20150702170635395
+tags: Javascript
+title: jQuery method: is
+type: text/vnd.tiddlywiki
+
+''Description'': Check the current matched set of elements against a selector, element, or jQuery object and return `true` if at least one of these elements matches the given arguments.
+
+http://api.jquery.com/is/

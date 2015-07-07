@@ -1,0 +1,16 @@
+created: 20150702183733143
+modified: 20150703102341390
+tags: Javascript
+title: jQuery method: delegate
+type: text/vnd.tiddlywiki
+
+''Description'': Attach a handler to one or more events for all elements that match the selector, now or in the future, based on a specific set of root elements.
+
+As of jQuery 1.7, `.delegate()` has been superseded by the `.on()` method.
+
+```
+// jQuery 1.4.3+
+$( elements ).delegate( selector, events, data, handler );
+// jQuery 1.7+
+$( elements ).on( events, selector, data, handler );
+```
