@@ -1,5 +1,6 @@
 created: 20150610193410797
-modified: 20150610193813929
+list: [[jQuery method: is]] [[jQuery method: unbind]] [[jQuery method: off]] [[jQuery method: delegate]]
+modified: 20150702183718612
 tags: Javascript
 title: jQuery methods
 type: text/vnd.tiddlywiki
@@ -9,4 +10,7 @@ type: text/vnd.tiddlywiki
 * .stop()
 * .extend()
 * .proxy()
-
+* [[.is()|jQuery method: is]]
+* [[.unbind()|jQuery method: unbind]]
+* [[.off()|jQuery method: off]]
+* [[.delegate()|jQuery method: delegate]]
